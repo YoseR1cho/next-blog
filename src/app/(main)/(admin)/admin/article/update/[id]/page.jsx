@@ -80,19 +80,20 @@ const Page = () => {
 
 
     useEffect(() => {
-        withLoading(getArticle(params.id)).then(res=>{
-            const {title,summary,tags:_tags,content} = res.data
-            const tags = idTranslate2Tag(_tags,tagList)
-            console.log(tagList,_tags,tags);
-            form.setFieldsValue({
-                title,
-                summary,
-                tags
+        if(typeof window !=='undefined'){
+            withLoading(getArticle(params.id)).then(res=>{
+                const {title,summary,tags:_tags,content} = res.data
+                const tags = idTranslate2Tag(_tags,tagList)
+                form.setFieldsValue({
+                    title,
+                    summary,
+                    tags
+                })
+                editorRef.current && editorRef.current.editorInst.setMarkdown(content);
             })
-            editorRef.current && editorRef.current.editorInst.setMarkdown(content);
-        })
-
-
+        }else {
+            console.log('window is not defined')
+        }
     }, []);
 
     return (
@@ -153,7 +154,7 @@ const Page = () => {
                     name='content'
                 >
                     <Editor
-                        editorRef={editorRef}
+                        ref={editorRef}
                         onchange={contentHandler}
                     />
                 </Form.Item>

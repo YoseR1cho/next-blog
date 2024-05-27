@@ -6,7 +6,7 @@ import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight-all.js';
 const Editor = dynamic(()=>import('@toast-ui/react-editor').then(mod=>mod.Editor),{ssr:false})
 
-const MyComponent = forwardRef(function Component({editorRef,onchange},ref){
+const MyComponent = forwardRef(function MyComponent({editorRef,onchange},ref){
 
     return (
         <div>
