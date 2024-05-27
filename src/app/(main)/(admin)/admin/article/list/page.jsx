@@ -1,6 +1,6 @@
 'use client'
-import React, {useState} from 'react';
-import {List, Spin} from 'antd';
+import React, {Suspense, useState} from 'react';
+import {List} from 'antd';
 import {notificate} from "@/components/notification";
 import styles from '../page.module.scss'
 import useFetchList from "@/hooks/useFetchList";
@@ -9,10 +9,10 @@ import {deleteArticle} from "@/utils/axios";
 import Confirm from "@/app/(main)/(admin)/admin/components/confirm";
 import { useRouter, useSearchParams} from "next/navigation";
 import Link from "next/link";
-import useAjaxLoading from "@/hooks/useAjaxLoading";
 
 
-const App = () => {
+
+const Page = () => {
     const searchParams = useSearchParams().toString()
     const [deleting,setDeleting] = useState({state:false,id:''});
     const [contextHolder,openNotification] = notificate();
@@ -87,4 +87,10 @@ const App = () => {
         </>
     )
 };
-export default App;
+export default function PageBar(){
+    return (
+        <Suspense>
+            <Page/>
+        </Suspense>
+    )
+};

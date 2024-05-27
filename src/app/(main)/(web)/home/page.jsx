@@ -1,5 +1,5 @@
 'use client'
-import React, {useRef} from 'react';
+import React, {Suspense, useRef} from 'react';
 import styles from './page.module.scss'
 
 import Spin from "@/components/spin";
@@ -44,4 +44,10 @@ const Page = () => {
 };
 
 
-export default Page;
+export default function PageBar(){
+    return (
+        <Suspense>
+            <Page/>
+        </Suspense>
+    )
+}
