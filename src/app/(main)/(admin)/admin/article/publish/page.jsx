@@ -87,7 +87,7 @@ const Page = () => {
 
 
     useEffect(() => {
-        if(typeof window !=='undefined'){
+        if(typeof window !==undefined){
             const titleInitialValue = localStorage.getItem('tuiUIEditor_articleTitle')?JSON.parse(localStorage.getItem('tuiUIEditor_articleTitle')):''
             const summaryInitialValue = localStorage.getItem('tuiUIEditor_articleSummary')?JSON.parse(localStorage.getItem('tuiUIEditor_articleSummary')):''
             const tagsInitialValue = localStorage.getItem('tuiUIEditor_articleTag')?JSON.parse(localStorage.getItem('tuiUIEditor_articleTag')):[]
