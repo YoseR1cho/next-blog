@@ -164,7 +164,7 @@ const Page = () => {
                     name='content'
                 >
                     <Editor
-                        editorRef={editorRef}
+                        ref={editorRef}
                         onchange={contentHandler}
                     />
                 </Form.Item>
