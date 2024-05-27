@@ -87,20 +87,16 @@ const Page = () => {
 
 
     useEffect(() => {
-        if(typeof window !==undefined){
-            const titleInitialValue = localStorage.getItem('tuiUIEditor_articleTitle')?JSON.parse(localStorage.getItem('tuiUIEditor_articleTitle')):''
-            const summaryInitialValue = localStorage.getItem('tuiUIEditor_articleSummary')?JSON.parse(localStorage.getItem('tuiUIEditor_articleSummary')):''
-            const tagsInitialValue = localStorage.getItem('tuiUIEditor_articleTag')?JSON.parse(localStorage.getItem('tuiUIEditor_articleTag')):[]
-            const contentInitialValue = localStorage.getItem('tuiUIEditor_articleContent')?JSON.parse(localStorage.getItem('tuiUIEditor_articleContent')):''
-            form.setFieldsValue({
-                title:titleInitialValue,
-                summary:summaryInitialValue,
-                tags:tagsInitialValue
-            })
-            editorRef.current && editorRef.current.editorInst.setMarkdown(contentInitialValue);
-        }else {
-            console.log('window is not defined')
-        }
+        const titleInitialValue = localStorage.getItem('tuiUIEditor_articleTitle')?JSON.parse(localStorage.getItem('tuiUIEditor_articleTitle')):''
+        const summaryInitialValue = localStorage.getItem('tuiUIEditor_articleSummary')?JSON.parse(localStorage.getItem('tuiUIEditor_articleSummary')):''
+        const tagsInitialValue = localStorage.getItem('tuiUIEditor_articleTag')?JSON.parse(localStorage.getItem('tuiUIEditor_articleTag')):[]
+        const contentInitialValue = localStorage.getItem('tuiUIEditor_articleContent')?JSON.parse(localStorage.getItem('tuiUIEditor_articleContent')):''
+        form.setFieldsValue({
+            title:titleInitialValue,
+            summary:summaryInitialValue,
+            tags:tagsInitialValue
+        })
+        editorRef.current && editorRef.current.editorInst.setMarkdown(contentInitialValue);
     }, []);
 
     return (
