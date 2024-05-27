@@ -1,7 +1,7 @@
 import "../globals.scss";
 
 export const metadata = {
-    title: "welcome my Blog",
+    title: "welcome to my Blog",
     description: "welcome to yoseR1cho's blog",
 };
 
