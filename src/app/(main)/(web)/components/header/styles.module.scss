@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color:#fff;
+  margin-bottom:20px;
+  padding:0 100px;
+
+  .leftHeader {
+    display: flex;
+  }
+
+  .user {
+    margin-right: 12rem;
+  }
+
+}
+
+.avatarBox {
+  width:64px;
+  margin-right:40px;
+}
+
+.userInfo {
+  font-size: 20px;
+  cursor: pointer;
+  color: #1677ff;
+  transition: all .3s;
+  span {
+    margin-right: 0.5rem;
+  }
+  &:hover {
+    color: #a2d4ff;
+  }
+  :global {
+    .anticon-down {
+      margin-left: 0.2rem;
+      font-size: 14px;
+    }
+  }
+}

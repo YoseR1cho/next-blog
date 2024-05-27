@@ -1,0 +1,58 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  margin-bottom: 20px;
+  padding: 0 100px; }
+  .header .leftHeader {
+    display: flex; }
+  .header .user {
+    margin-right: 12rem; }
+  .header .login {
+    background-color: #4994fd;
+    border: none; }
+    .header .login:hover {
+      background-color: #d7eaff;
+      color: #007bff; }
+  .header .register {
+    margin-left: 15px;
+    background-color: #eeeeee;
+    border: 1px solid #ccc; }
+    .header .register:hover {
+      background-color: #fff;
+      color: #3482f1; }
+
+.login,
+.register {
+  margin-top: 15px;
+  width: 5rem;
+  height: 2.2rem;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all .3s; }
+  .login span,
+  .register span {
+    margin-right: 10px; }
+
+.avatarBox {
+  width: 64px;
+  margin-right: 40px; }
+  .avatarBox .avatar {
+    height: 64px;
+    width: 64px; }
+
+.userInfo {
+  font-size: 20px;
+  cursor: pointer;
+  color: #1677ff;
+  transition: all .3s; }
+  .userInfo span {
+    margin-right: 0.5rem; }
+  .userInfo:hover {
+    color: #a2d4ff; }
+  .userInfo :global .anticon-down {
+    margin-left: 0.2rem;
+    font-size: 14px; }
+
+/*# sourceMappingURL=page.module.scss.map */

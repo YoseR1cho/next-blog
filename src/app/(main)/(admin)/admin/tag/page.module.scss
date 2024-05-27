@@ -1,0 +1,93 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.title {
+    margin-left: 3rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
+
+.tagList {
+    width: 100%;
+}
+
+.tag {
+    padding-left: 1rem;
+    text-align: center;
+}
+
+.delete {
+    margin-left: 0.6rem;
+    margin-right: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.delete:hover {
+    color: #ccc;
+}
+
+.tag,
+.add
+{
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    background-color: #c5c5c5;
+    margin-left: 3rem;
+    border-radius: 7px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.add {
+    width: 105px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 7px;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 0 10px;
+    transition: all .5s;
+    cursor: pointer;
+}
+
+.add:hover {
+    color: #1677ff;
+}
+
+.input {
+    width: 105px;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    background-color: #fff;
+    margin-left: 3rem;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid #fff;
+    outline: none;
+    padding-left: 0.5rem;
+    transition: all .5s;
+}
+
+.input:focus {
+    outline:1px solid #1677ff;
+}
+
+.chartContainer {
+    width: 800px;
+
+    height: 450px;
+    padding: 10px;
+    .chart {
+        width: 100%;
+        height: 100%;
+    }
+}
