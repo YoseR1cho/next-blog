@@ -17,7 +17,6 @@ const Page = () => {
     const params = useParams()
     const homeRef = useRef();
     const searchParams = useSearchParams().toString()
-    console.log(searchParams);
 
     // 发送请求获取文章列表和页面跳转信息
     const { loading, pagination, dataList } = useFetchList({

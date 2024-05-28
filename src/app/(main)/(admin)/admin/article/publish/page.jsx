@@ -4,11 +4,12 @@ import {Form, Input, Button, Select, Tag, message, Spin} from 'antd'
 import {notificate} from "@/components/notification";
 import styles from '../page.module.scss'
 import {useSelector} from "react-redux";
-import Editor from "@/app/(main)/(admin)/admin/components/editor";
+const Editor = dynamic(()=>import("@/app/(main)/(admin)/admin/components/editor"),{ssr:false})
 import useAjaxLoading from "@/hooks/useAjaxLoading";
 import {debounce, tagTranslate} from '@/utils'
 import {publishArticle} from "@/utils/axios";
 import {useRouter} from "next/navigation";
+import dynamic from "next/dynamic";
 
 
 const Page = () => {
@@ -74,7 +75,6 @@ const Page = () => {
 
     //存储文章信息(添加防抖功能)
     const contentHandler = debounce(()=>{
-        console.log(1)
         form.setFieldsValue({
             content:editorRef.current?.editorInst.getMarkdown()
         })
@@ -87,20 +87,16 @@ const Page = () => {
 
 
     useEffect(() => {
-        if(typeof window !=='undefined'){
-            const titleInitialValue = localStorage.getItem('tuiUIEditor_articleTitle')?JSON.parse(localStorage.getItem('tuiUIEditor_articleTitle')):''
-            const summaryInitialValue = localStorage.getItem('tuiUIEditor_articleSummary')?JSON.parse(localStorage.getItem('tuiUIEditor_articleSummary')):''
-            const tagsInitialValue = localStorage.getItem('tuiUIEditor_articleTag')?JSON.parse(localStorage.getItem('tuiUIEditor_articleTag')):[]
-            const contentInitialValue = localStorage.getItem('tuiUIEditor_articleContent')?JSON.parse(localStorage.getItem('tuiUIEditor_articleContent')):''
-            form.setFieldsValue({
-                title:titleInitialValue,
-                summary:summaryInitialValue,
-                tags:tagsInitialValue
-            })
-            editorRef.current && editorRef.current.editorInst.setMarkdown(contentInitialValue);
-        }else {
-            console.log('window is not defined')
-        }
+        const titleInitialValue = localStorage.getItem('tuiUIEditor_articleTitle')?JSON.parse(localStorage.getItem('tuiUIEditor_articleTitle')):''
+        const summaryInitialValue = localStorage.getItem('tuiUIEditor_articleSummary')?JSON.parse(localStorage.getItem('tuiUIEditor_articleSummary')):''
+        const tagsInitialValue = localStorage.getItem('tuiUIEditor_articleTag')?JSON.parse(localStorage.getItem('tuiUIEditor_articleTag')):[]
+        const contentInitialValue = localStorage.getItem('tuiUIEditor_articleContent')?JSON.parse(localStorage.getItem('tuiUIEditor_articleContent')):''
+        form.setFieldsValue({
+            title:titleInitialValue,
+            summary:summaryInitialValue,
+            tags:tagsInitialValue
+        })
+        editorRef.current && editorRef.current.editorInst.setMarkdown(contentInitialValue);
     }, []);
 
     return (

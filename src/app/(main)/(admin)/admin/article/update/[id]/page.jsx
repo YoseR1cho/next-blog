@@ -1,5 +1,5 @@
 'use client'
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {Form, Input, Button, Select, Tag, message, Spin} from 'antd'
 import {notificate} from "@/components/notification";
 import styles from '../../page.module.scss'
@@ -80,20 +80,19 @@ const Page = () => {
 
 
     useEffect(() => {
-        if(typeof window !=='undefined'){
-            withLoading(getArticle(params.id)).then(res=>{
-                const {title,summary,tags:_tags,content} = res.data
-                const tags = idTranslate2Tag(_tags,tagList)
-                form.setFieldsValue({
-                    title,
-                    summary,
-                    tags
-                })
-                editorRef.current && editorRef.current.editorInst.setMarkdown(content);
+        withLoading(getArticle(params.id)).then(res=>{
+            const {title,summary,tags:_tags,content} = res.data
+            const tags = idTranslate2Tag(_tags,tagList)
+            console.log(tagList,_tags,tags);
+            form.setFieldsValue({
+                title,
+                summary,
+                tags
             })
-        }else {
-            console.log('window is not defined')
-        }
+            editorRef.current && editorRef.current.editorInst.setMarkdown(content);
+        })
+
+
     }, []);
 
     return (
@@ -154,8 +153,8 @@ const Page = () => {
                     name='content'
                 >
                     <Editor
-                        ref={editorRef}
                         onchange={contentHandler}
+                        ref={editorRef}
                     />
                 </Form.Item>
 
