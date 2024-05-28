@@ -1,15 +1,21 @@
 'use client'
-import React, {useEffect, useRef} from 'react';
+import React, {forwardRef, useEffect, useRef} from 'react';
 import {Form, Input, Button, Select, Tag, message, Spin} from 'antd'
 import {notificate} from "@/components/notification";
 import styles from '../../page.module.scss'
 import {useSelector} from "react-redux";
-import Editor from "@/app/(main)/(admin)/admin/components/editor";
 import useAjaxLoading from "@/hooks/useAjaxLoading";
 import {debounce, idTranslate2Tag, tagTranslate} from '@/utils'
 import {patchArticle} from "@/utils/axios";
 import {useParams, useRouter} from "next/navigation";
 import {getArticle} from "@/utils/api";
+import dynamic from "next/dynamic";
+
+const Editor = dynamic(()=>import("@/app/(main)/(admin)/admin/components/editor"),{ssr:false})
+const ForwardRefEditor = forwardRef(function Component(props,ref){
+    return <Editor {...props} ref={ref}/>
+})
+
 
 const Page = () => {
     const [form] = Form.useForm();
@@ -83,7 +89,7 @@ const Page = () => {
         withLoading(getArticle(params.id)).then(res=>{
             const {title,summary,tags:_tags,content} = res.data
             const tags = idTranslate2Tag(_tags,tagList)
-            console.log(tagList,_tags,tags);
+            console.log(content);
             form.setFieldsValue({
                 title,
                 summary,
@@ -152,9 +158,9 @@ const Page = () => {
                 <Form.Item
                     name='content'
                 >
-                    <Editor
+                    <ForwardRefEditor
                         onchange={contentHandler}
-                        ref={editorRef}
+                        editorRef={editorRef}
                     />
                 </Form.Item>
 

@@ -1,15 +1,20 @@
 'use client'
-import React, {useEffect, useRef} from 'react';
+import React, {forwardRef, useEffect, useRef} from 'react';
 import {Form, Input, Button, Select, Tag, message, Spin} from 'antd'
 import {notificate} from "@/components/notification";
 import styles from '../page.module.scss'
 import {useSelector} from "react-redux";
-const Editor = dynamic(()=>import("@/app/(main)/(admin)/admin/components/editor"),{ssr:false})
 import useAjaxLoading from "@/hooks/useAjaxLoading";
 import {debounce, tagTranslate} from '@/utils'
 import {publishArticle} from "@/utils/axios";
 import {useRouter} from "next/navigation";
 import dynamic from "next/dynamic";
+
+const Editor = dynamic(()=>import("@/app/(main)/(admin)/admin/components/editor"),{ssr:false})
+const ForwardRefEditor = forwardRef(function Component(props,ref){
+    return <Editor {...props} ref={ref}/>
+})
+
 
 
 const Page = () => {
@@ -159,9 +164,9 @@ const Page = () => {
                 <Form.Item
                     name='content'
                 >
-                    <Editor
-                        ref={editorRef}
+                    <ForwardRefEditor
                         onchange={contentHandler}
+                        editorRef={editorRef}
                     />
                 </Form.Item>
                 <Form.Item

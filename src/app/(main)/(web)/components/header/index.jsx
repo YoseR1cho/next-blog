@@ -43,6 +43,28 @@ function Index(){
         </Menu>
     )
 
+    const userMenu = [
+        {
+            key:'1',
+            label:(
+                <div onClick={()=>{
+                    dispatch(fetchLogout());
+                    message.success('登出成功！')
+                }}>
+                    <LogoutOutlined style={{marginRight:'13px'}}/>登出
+                </div>
+            )
+        },
+        {
+            key:'2',
+            label:(
+                <>
+                    <TeamOutlined style={{marginRight:'5px'}}/><Link href='/user'>个人信息</Link>
+                </>
+            )
+        }
+    ]
+
 
     return (
         <>
@@ -63,7 +85,7 @@ function Index(){
                 </div>
                 <div className={styles.user}>
                     {user.isLogin?
-                        (<Dropdown overlay={menu}>
+                        (<Dropdown menu={{items:userMenu}}>
                             <div className={styles.userInfo}>
                                 <UserOutlined /> {`${user.username}`}<DownOutlined/>
                             </div>
