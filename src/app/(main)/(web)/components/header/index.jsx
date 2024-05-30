@@ -87,7 +87,7 @@ function Index(){
                     {user.isLogin?
                         (<Dropdown menu={{items:userMenu}}>
                             <div className={styles.userInfo}>
-                                <UserOutlined /> {`${user.username}`}<DownOutlined/>
+                                <UserOutlined /><span className={styles.nickName}>{`${user.username}`}</span><DownOutlined/>
                             </div>
                         </Dropdown>):
                         <>

@@ -1,11 +1,12 @@
 import React from 'react';
 import {Pagination} from "antd";
+import styles from './style.module.scss'
 
 const Index = (props) => {
     return (
-        <div>
+        <div className={styles.pagination_container}>
             <Pagination
-                style={{display:"flex",justifyContent:'center',marginRight:'30vh'}}
+                rootClassName={styles.pagination}
                 hideOnSinglePage
                 current={props.current}
                 onChange={props.onChange}

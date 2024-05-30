@@ -37,3 +37,6 @@ export const tokenLogin = (token)=>request.get('/user/admin',{
         Authorization:token
     }
 });
+
+//上传图片到服务器
+export const uploadImg = (form)=>request.post('/upload',form)

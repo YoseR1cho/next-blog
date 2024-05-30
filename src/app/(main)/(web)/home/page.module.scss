@@ -6,10 +6,10 @@
 .app_home {
   flex:auto;
   min-height: 100%;
-  margin: auto;
   $previewWidth:292px;
   .app_List{
-    width: 70%
+    width: 70%;
+    padding-left: 50px;
   }
   .appList_item {
     position: relative;
@@ -81,5 +81,12 @@
   .ant_menu_item_icon {
     padding-left: 3px;
     margin-right: 10px;
+  }
+}
+
+
+@media screen and (max-width: 990px){
+  .app_List {
+    width: 90% !important;
   }
 }

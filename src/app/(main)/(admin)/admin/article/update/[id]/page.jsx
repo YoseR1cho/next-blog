@@ -89,7 +89,6 @@ const Page = () => {
         withLoading(getArticle(params.id)).then(res=>{
             const {title,summary,tags:_tags,content} = res.data
             const tags = idTranslate2Tag(_tags,tagList)
-            console.log(content);
             form.setFieldsValue({
                 title,
                 summary,

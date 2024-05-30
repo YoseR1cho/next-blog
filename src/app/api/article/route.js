@@ -27,8 +27,9 @@ export async function GET(req){
             {
                 $facet:{
                     articleData:[
+                        {$sort: {createAt: -1}},
                         {$skip:skip},
-                        {$limit:pageSize}
+                        {$limit:pageSize},
                     ],
                     totalCount:[
                         {$count:'totalCount'}

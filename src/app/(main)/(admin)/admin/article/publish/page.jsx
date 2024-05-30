@@ -39,6 +39,7 @@ const Page = () => {
                 localStorage.removeItem('tuiUIEditor_articleContent');
                 localStorage.removeItem('tuiUIEditor_articleSummary');
                 localStorage.removeItem('tuiUIEditor_articleTitle');
+                localStorage.removeItem('tuiUIEditor_articleTag')
                 router.push('/admin/article/list');
             },2000);
         }).catch(e=>{

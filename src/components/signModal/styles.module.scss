@@ -126,3 +126,9 @@
   margin-right: 0.5rem;
   color: red;
 }
+
+@media screen and (max-width: 600px){
+  .register {
+    display: none;
+  }
+}

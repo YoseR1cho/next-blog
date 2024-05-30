@@ -37,6 +37,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "react-typist": "^2.0.5",
     "sass": "^1.77.2",
+    "vditor": "^3.10.4",
     "xss": "^1.0.15"
   },
   "devDependencies": {
