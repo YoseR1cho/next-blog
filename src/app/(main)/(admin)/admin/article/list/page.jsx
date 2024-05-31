@@ -18,7 +18,7 @@ const Page = () => {
     const [contextHolder,openNotification] = notificate();
     const router = useRouter()
 
-    const { pagination, dataList,loading } = useFetchList({
+    const { pagination, dataList,loading,onFetch } = useFetchList({
         queryParams: { pageSize: BACKGROUND_PAGESIZE,},
         fetchDependence: [searchParams]
     })
@@ -36,7 +36,7 @@ const Page = () => {
         deleteArticle(id).then(()=>{
             setDeleting({stmate:false,id:''});
             openNotification('文章删除提醒','恭喜，您的文章删除成功！')
-            router.refresh()
+            onFetch()
         }).catch(()=>{
             openNotification('文章删除提醒','文章删除失败！')
             setDeleting({state: false,id:''})

@@ -18,7 +18,6 @@ export default function useFetchList({
     const router = useRouter()
     const searchParams = useSearchParams().toString()
     const pathname = usePathname()
-    const tagList = useSelector(store=>store.article.tagList);
 
     useMount(()=>{
         if(fetchDependence.length===0){

@@ -21,7 +21,7 @@ export async function POST(req){
             buffer
         );
         return NextResponse.json({ msg: "图片上传成功！",data:{
-                url:`http://localhost:3000/uploads/${filename}`,
+                url:`${process.env.DOMAIN_URL}/uploads/${filename}`,
                 filename
             } },{ status: 200});
     } catch (error) {
