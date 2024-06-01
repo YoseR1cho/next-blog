@@ -1,12 +1,14 @@
 'use client'
 import React, {useState, useRef, useEffect} from 'react';
 import styles from './page.module.scss'
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {CheckCircleOutlined, CloseOutlined, PlusOutlined} from "@ant-design/icons";
-import {notification} from "antd";
-import {addTag, deleteTag} from "@/utils/axios";
+import {message, notification} from "antd";
+import {addTag} from "@/utils/axios";
+import {getTags,deleteTag} from "@/store/article/actionCreators";
 
 const Page = () => {
+    const dispatch = useDispatch()
     const inputRef = useRef();
     const tagList = useSelector(store=>store.article.tagList)
     const [isAdding,setIsAdding] = useState(false);
@@ -16,10 +18,10 @@ const Page = () => {
         if(value!==''){
             setLoading(true);
             await addTag({name: value})
-            openNotification()
+            await dispatch(getTags())
+            message.success('标签添加成功')
             setLoading(false);
             setIsAdding(false);
-            window.location.reload();
         }else{
             setIsAdding(false);
         }
@@ -27,30 +29,22 @@ const Page = () => {
 
     const tagDelete = async (id)=>{
         setLoading(true);
-        await deleteTag(id)
-        openNotification();
-        setLoading(false);
-        setTimeout(()=>{
-            window.location.reload();
-        },1000)
+        try {
+            await deleteTag(id)
+            await dispatch(deleteTag(id))
+            setLoading(false);
+            message.success('标签删除成功！')
+        }catch (e){
+            console.log(e);
+        }
     }
 
     useEffect(() => {
         isAdding && inputRef.current.focus();
     }, [isAdding]);
 
-    const [api, contextHolder] = notification.useNotification();
-    const openNotification = () => {
-        api.info({
-            message: isAdding?'标签添加成功':'标签删除成功',
-            placement:'topRight',
-            icon:<CheckCircleOutlined style={{color:'#00EE00'}}/>
-        });
-    };
-
     return (
         <div className={styles.main}>
-            {contextHolder}
             <h1 className={styles.title}>标签管理</h1>
             <div className={styles.tagList}>
                 {tagList.map(tag=>{

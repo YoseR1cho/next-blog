@@ -12,10 +12,13 @@ const articleSlice = createSlice({
         getTagList(state,action){
             let tagList = generateColor(action.payload)
             state.tagList = tagList;
+        },
+        setTagList(state,action){
+            state.tagList = action.payload
         }
     }
 })
 
 export const {reducer:articleReducer} = articleSlice;
 
-export const {getTagList} = articleSlice.actions
+export const {getTagList,setTagList} = articleSlice.actions

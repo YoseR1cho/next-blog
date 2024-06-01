@@ -17,7 +17,5 @@ tagSchema.pre("save",function (next){
 
 const tags = mongoose.models.tags || mongoose.model('tags',tagSchema);
 
-console.log(tags);
-
 export default tags;
 

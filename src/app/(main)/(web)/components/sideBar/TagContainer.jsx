@@ -9,8 +9,7 @@ const TagContainer = () => {
     const tagList = useSelector(state=>state.article.tagList)
     const router = useRouter()
     const clickHandler = (name)=>{
-        router.push(`/tags/${name}`)
-        window.location.reload();
+        router.push(`/home/${name}`)
     }
     return (
         <div className={styles.tag_wrap}>

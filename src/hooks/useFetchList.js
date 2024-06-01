@@ -4,12 +4,12 @@ import {decodeQuery} from  '@/utils'
 import useMount from '@/hooks/useMount'
 import {getArticleList} from "@/utils/axios";
 import {useSelector} from "react-redux";
+import useCompare from "@/hooks/useCompare";
 
 export default function useFetchList({
     queryParams= null,
     withLoading = true,
     fetchDependence = [],
-    key=''
 }){
     const [dataList,setDataList] = useState([])
     const [loading,setLoading] = useState(false);
@@ -30,7 +30,7 @@ export default function useFetchList({
             const params = decodeQuery(searchParams || '')
             fetchWithLoading(params)
         }
-    },fetchDependence)
+    },[useCompare(fetchDependence),useCompare(queryParams)])
 
     function fetchWithLoading(params){
         withLoading && setLoading(true);

@@ -1,4 +1,4 @@
-import {getTagList} from "@/store/article/reducer";
+import {getAllTagList, getTagList, setTagList} from "@/store/article/reducer";
 import {getAllTag} from "@/utils/axios";
 import {message} from "antd";
 
@@ -16,6 +16,20 @@ export const getTags = ()=>{
         }catch (e){
             message.error('标签获取失败！')
             console.log(e)
+        }
+
+    }
+}
+
+export const deleteTag = (id)=>{
+    return async (dispatch,getState)=>{
+        try {
+            const tagList = getState().article.tagList
+            console.log(tagList);
+            const newTagList = tagList.filter(item=>item.id!==id)
+            dispatch(setTagList(newTagList))
+        }catch (e){
+            throw new Error(e)
         }
 
     }

@@ -32,14 +32,13 @@ const Page = () => {
 
     const onFinish = (values)=>{
         const articlePost = tagTranslate(values,tagList)
-
         withLoading(publishArticle(articlePost)).then(()=>{
+            router.push('/admin/article/list');
             message.success('文章发布成功！')
             localStorage.removeItem('tuiUIEditor_articleContent');
             localStorage.removeItem('tuiUIEditor_articleSummary');
             localStorage.removeItem('tuiUIEditor_articleTitle');
             localStorage.removeItem('tuiUIEditor_articleTag')
-            router.push('/admin/article/list');
         }).catch(e=>{
             message.error('文章发布失败！请重试。')
         })

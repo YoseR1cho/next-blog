@@ -8,11 +8,12 @@ import {message} from "antd";
 export default function Authadmin({children}) {
     const dispatch = useDispatch();
     const router = useRouter()
-
+    const role = useSelector(store=>store.user.role);
     React.useEffect(() => {
         const asyncGet = async ()=>{
             try {
                 await dispatch(fetchToken())
+
                 if(role!==0){
                     router.push('/home')
                     message.error('抱歉，您没有访问权限！')
@@ -25,7 +26,7 @@ export default function Authadmin({children}) {
         }
         asyncGet()
     }, []);
-    const role = useSelector(store=>store.user.role);
+
 
     return (
         <>

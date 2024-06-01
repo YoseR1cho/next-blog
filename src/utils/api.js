@@ -24,7 +24,7 @@ export const getAllTag = ()=>request.get('/tag');
 export const addTag = (values) =>request.post('/tag',{...values});
 
 //删除标签
-export const deleteTag = (id)=>request.delete(`/tag/delete/${id}`);
+export const deleteTag = (id)=>request.delete(`/tag/${id}`);
 // 用户登录
 export const userLogin = (user)=>request.post('/user/login',user)
 

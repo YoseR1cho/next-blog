@@ -8,7 +8,6 @@ const LinkList = () => {
     const router = useRouter()
     const changeNav = ()=>{
         router.push('/home');
-        window.location.reload();
     }
     const role = useSelector(store=>store.user.role);
     return (

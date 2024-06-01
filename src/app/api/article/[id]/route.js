@@ -6,7 +6,6 @@ connectToDatabase()
 
 //获取单篇文章
 export async function GET(req,{params}){
-    console.log(params);
     try {
         const id = params.id;
         const data = await articles.find({_id:id}).populate().exec()

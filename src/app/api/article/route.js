@@ -7,13 +7,12 @@ connectToDatabase()
 export async function GET(req){
     const _page = req.nextUrl.searchParams.get('page')
     const _pageSize = req.nextUrl.searchParams.get('pageSize')
-    const key = req.nextUrl.searchParams.get('key')
-    console.log(_page,_pageSize);
+    const tag = req.nextUrl.searchParams.get('key[tag]')
     try {
         const page = parseInt(_page) || 1;
         const pageSize = parseInt(_pageSize) || 10
         const skip = (page - 1) * pageSize;
-        const match = key?{"tags.name":key.tag}:{}
+        const tagMatch = tag?{"tags.name":tag}:{}
         const data = await articles.aggregate([
             {$lookup:{
                     from:'tags',
@@ -22,7 +21,7 @@ export async function GET(req){
                     as:'tags'
                 }},
             {
-                $match:match
+                $match:tagMatch
             },
             {
                 $facet:{
@@ -54,7 +53,6 @@ export async function GET(req){
 export async function POST(req){
     try {
         const body = await req.json()
-        console.log(body);
         const data = await articles.create({
             ...body,
         })
