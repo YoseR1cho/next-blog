@@ -14,16 +14,18 @@ export async function GET(req){
         if(!token)  throw new Error('token信息为空！')
 
         //jwt校验token信息
-        const {username,id,role} = await jwt.verify(token,SECRET,["HS256"])
+        const {username,id,role,avatar} = await jwt.verify(token,SECRET,["HS256"])
 
         //校验成功则注册新的token用于持久化登录
-        const newToken =jwt.sign({username,id,role},SECRET,
+        const newToken =jwt.sign({username,id,role,avatar:avatar || ''},SECRET,
             {expiresIn: 60 * 60 * 24 * 3}
         );
 
+        console.log(newToken);
+
         return NextResponse.json({
             message:'token校验成功!',
-            data: {username,id,role,newToken},
+            data: {username,id,role,newToken,avatar},
             success:true
         },{status:200})
     }catch (error){

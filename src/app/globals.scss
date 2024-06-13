@@ -21,3 +21,71 @@ li {
 #root {
   height: 100%;
 }
+
+::-webkit-scrollbar {
+  width:5px;
+  height:10px;
+  background-color:#ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius:10px;
+  background-color:#cccccc;
+}
+
+::-webkit-scrollbar-track {
+  border-radius:10px;
+  background-color:#F5F5F5;
+}
+
+
+.ant-modal-title {
+  font-size: 20px !important;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #cccccc;
+}
+
+
+.redBtn {
+  color: #fff !important;
+  background-color: #f84242;
+  color: #fff;
+  &:hover {
+    border: 1px solid #efecec !important;
+    background-color: #ff0000 !important;
+    color: #fff !important;
+  }
+}
+
+.blueBtn {
+  color: #fff !important;
+  background-color: deepskyblue !important;
+  &:hover {
+    background-color: #009fff !important;
+    border: 1px solid #efecec !important;
+    color: #fff !important;
+  }
+  &:disabled {
+    background-color: #9fdeff;
+    &:hover {
+      background-color:#9fdeff !important;
+    }
+  }
+}
+
+.greenBtn {
+  color: #fff !important;
+  background-color: #00c700;
+
+  &:hover {
+    background-color: #00ee00 !important;
+    border: 1px solid #efecec !important;
+    color: #fff !important;
+  }
+  &:disabled {
+    background-color: #9fff9f;
+    &:hover {
+      background-color: #9fff9f !important;
+    }
+  }
+}

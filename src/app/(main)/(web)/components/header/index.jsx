@@ -2,24 +2,26 @@ import {Menu, Layout, Dropdown, message} from "antd";
 import React from "react";
 import styles from './styles.module.scss'
 import {
-    EditOutlined, UserOutlined, DownOutlined, TeamOutlined, LogoutOutlined,} from '@ant-design/icons';
+    EditOutlined, UserOutlined, DownOutlined, TeamOutlined, LogoutOutlined, OpenAIOutlined,
+} from '@ant-design/icons';
 import {useDispatch, useSelector} from "react-redux";
 import Link from "next/link";
 import {useRouter} from 'next/navigation'
 import {fetchLogout} from "@/store/user/actionCreators";
 import Image from "next/image";
 import SignModal from "@/components/signModal";
+import PersonInfo from "@/app/(main)/(web)/components/personInfo";
 const {Header} = Layout;
 
 const items = [
     {
-        label: '归档',
-        key: 'archive',
-        icon: <EditOutlined />,
+        label: 'AI 聊天',
+        key: '/chat',
+        icon: <OpenAIOutlined />,
     },
     {
         label: '关于',
-        key: 'about',
+        key: '/about',
         icon: <UserOutlined />,
     },
 ];
@@ -59,7 +61,7 @@ function Index(){
             key:'2',
             label:(
                 <>
-                    <TeamOutlined style={{marginRight:'5px'}}/><Link href='/user'>个人信息</Link>
+                    <TeamOutlined style={{marginRight:'5px'}}/><PersonInfo/>
                 </>
             )
         }

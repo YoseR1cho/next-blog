@@ -19,12 +19,13 @@ export async function POST(req){
             }, {status: 400})
         }
 
-        const {_id:id,role} =data;
+        const {_id:id,role,avatar} =data;
         //创建当前用户的token
         const user ={
             username,
             id,
-            role
+            role,
+            avatar:avatar || ''
         }
         let token =jwt.sign(user,SECRET,{
             expiresIn: 60*60*24*3
@@ -32,7 +33,7 @@ export async function POST(req){
 
         return NextResponse.json({
             message:'登录成功!',
-            data: {token,id,role},
+            data: {token,id,role,avatar},
             success:true
         },{status:200})
     }catch (error){

@@ -3,14 +3,12 @@ import {getToken, setToken as _setToken,removeToken} from '@/utils/token'
 
 const userSlice = createSlice({
     name:'user',
-    initialState: {token:getToken() || '',isLogin:false,username:'',id:'',role:1},
+    initialState: {token:getToken() || '',isLogin:false,username:'',id:'',role:1,avatar:''},
     reducers:{
         setUser(state,action){
-            const {username,id,token,role} = action.payload;
-            state.username = username;
-            state.id = id;
-            state.role = role
-            state.token = token;
+            Object.keys(action.payload).forEach(key=>{
+                state[key] = action.payload[key]
+            })
             state.isLogin = true;
             _setToken(action.payload.token);
         },

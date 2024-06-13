@@ -26,10 +26,6 @@ const Page = () => {
     const tagList = useSelector(store=>store.article.tagList)
     const [loading,withLoading] = useAjaxLoading();
 
-    const [contextHolder,openNotification] = notificate();
-
-
-
     const onFinish = (values)=>{
         const articlePost = tagTranslate(values,tagList)
         withLoading(publishArticle(articlePost)).then(()=>{
@@ -104,7 +100,6 @@ const Page = () => {
 
     return (
         <Spin spinning={loading}>
-            {contextHolder}
             <Form
                 className={styles.form}
                 form={form}

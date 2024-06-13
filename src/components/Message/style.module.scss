@@ -1,0 +1,25 @@
+@keyframes appear {
+  0% {
+    display: block;
+    opacity: 0;
+    top: 0;
+  }
+
+  100% {
+    opacity: 1;
+    top:200px;
+  }
+}
+
+.modal {
+  position:absolute;
+  width:100px;
+  height:50px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align:center;
+  line-height:50px;
+  font-size:16px;
+  background-color: #fff;
+  animation: appear 3s infinite;
+}

@@ -9,12 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^0.0.24",
+    "@ai-sdk/react": "^0.0.1",
     "@ant-design/icons": "^5.3.7",
     "@ant-design/nextjs-registry": "^1.0.0",
     "@reduxjs/toolkit": "^2.2.5",
     "@toast-ui/editor-plugin-code-syntax-highlight": "^3.1.0",
     "@toast-ui/react-editor": "^3.2.3",
     "ahooks": "^3.7.11",
+    "ai": "^3.1.32",
     "antd": "^5.17.2",
     "axios": "^1.6.8",
     "cloudinary": "^2.2.0",
@@ -41,7 +44,8 @@
     "react-typist": "^2.0.5",
     "sass": "^1.77.2",
     "vditor": "^3.10.4",
-    "xss": "^1.0.15"
+    "xss": "^1.0.15",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "eslint": "^8",

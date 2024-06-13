@@ -6,7 +6,7 @@ import styles from '../../page.module.scss'
 import {useSelector} from "react-redux";
 import useAjaxLoading from "@/hooks/useAjaxLoading";
 import {debounce, idTranslate2Tag, tagTranslate} from '@/utils'
-import {patchArticle} from "@/utils/axios";
+import {patchArticle, publishArticle} from "@/utils/axios";
 import {useParams, useRouter} from "next/navigation";
 import {getArticle} from "@/utils/api";
 import dynamic from "next/dynamic";
@@ -37,10 +37,8 @@ const Page = () => {
         const articlePost = tagTranslate(article,tagList)
 
         withLoading(patchArticle(params.id,articlePost)).then(()=>{
-            openNotification('文章修改提醒',`恭喜，您的文章修改成功！`);
-            setTimeout(()=>{
-                router.push('/admin/article/list');
-            },2000);
+            router.push('/admin/article/list');
+            message.success('文章修改成功！')
         }).catch(e=>{
             message.error('文章修改失败！请重试。')
         })

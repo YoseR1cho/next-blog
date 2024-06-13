@@ -48,7 +48,7 @@ export default function useFetchList({
         requestParams.pageSize = parseInt(requestParams.pageSize);
         getArticleList(requestParams).then(res=>{
             let data = res.data[0]
-            pagination.total = data.totalCount[0].totalCount;
+            pagination.total = data.totalCount[0]?.totalCount;
             pagination.current = parseInt(requestParams.page);
             pagination.pageSize = parseInt(requestParams.pageSize);
             setDataList(data.articleData);

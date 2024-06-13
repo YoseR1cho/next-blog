@@ -18,6 +18,15 @@ let userSchema = new mongoose.Schema({
         type:Number,
         required:true,
         default:1 //1代表是用户 0代表是管理员
+    },
+    avatar:{
+        type:String,
+        default: ''
+    },
+    chatTimes:{
+        type:Number,
+        required:true,
+        default:0
     }
 })
 

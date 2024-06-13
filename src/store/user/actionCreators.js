@@ -8,8 +8,8 @@ export const fetchLogin = (values)=>{
     return async dispatch=>{
         try {
             const res = await userLogin({username, password});
-            const {id,token,role} = res.data;
-            dispatch(setUser({token,username,id,role}));
+            const {id,token,role,avatar} = res.data;
+            dispatch(setUser({token,username,id,role,avatar:avatar || ''}));
         }
         catch (err){
             throw err;
@@ -35,8 +35,7 @@ export const fetchToken = ()=>{
             const token = getToken();
             if(token){
                 const res = await tokenLogin(token);
-                const {username,id,newToken,role} = res.data;
-                dispatch(setUser({username,id,token:newToken,role}));
+                dispatch(setUser({...res.data,newToken: undefined,token:res.data.newToken}));
             }
         }catch (e){
             message.error('身份认证失败！')
