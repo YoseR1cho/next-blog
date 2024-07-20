@@ -1,33 +1,47 @@
-.layout{
-  height: 100%;
+.layout {
+    min-height: 100%;
 }
 
 .menu {
-  height: calc(100% - 64px);
+    height: calc(100% - 64px);
+
+    :global {
+        .ant-menu-item {
+            margin-inline:0!important;
+            margin-block: 0 !important;
+            margin-block-end: 0 !important;
+        }
+    }
 }
 
 .logo {
-  height: 64px;
-  padding: 0 16px  0 16px;
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
+    height: 64px;
+    padding: 0 16px 0 16px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    background-color: #2d313c;
 
+    h1 {
+        line-height: 64px;
+        color: #ffffff;
+    }
 }
 
 .avatar {
-  height: 48px;
-  width: 48px;
-  margin:8px 8px 0 0;
+    height: 48px;
+    width: 48px;
+    margin: 8px 8px 0 0;
 }
 
 .chartContainer {
-  width: 800px;
+    width: 800px;
 
-  height: 450px;
-  padding: 10px;
-  .chart {
-    width: 100%;
-    height: 100%;
-  }
+    height: 450px;
+    padding: 10px;
+    .chart {
+        width: 100%;
+        height: 100%;
+    }
 }
+

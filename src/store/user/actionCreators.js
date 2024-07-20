@@ -48,3 +48,9 @@ export const fetchLogout = ()=>{
         dispatch(removeUser());
     }
 }
+
+export const fetchInfo = (values)=>{
+    return dispatch =>{
+
+    }
+}

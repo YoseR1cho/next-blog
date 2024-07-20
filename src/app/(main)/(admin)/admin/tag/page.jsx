@@ -13,6 +13,7 @@ const Page = () => {
     const tagList = useSelector(store=>store.article.tagList)
     const [isAdding,setIsAdding] = useState(false);
     const [loading,setLoading] = useState(false);
+
     const blurHandler = async ()=>{
         const value = inputRef.current.value.trim();
         if(value!==''){
@@ -36,6 +37,9 @@ const Page = () => {
             message.success('标签删除成功！')
         }catch (e){
             console.log(e);
+            setLoading(false);
+            message.error('标签删除失败！')
+
         }
     }
 
@@ -45,7 +49,6 @@ const Page = () => {
 
     return (
         <div className={styles.main}>
-            <h1 className={styles.title}>标签管理</h1>
             <div className={styles.tagList}>
                 {tagList.map(tag=>{
                     return (

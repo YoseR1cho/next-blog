@@ -1,4 +1,4 @@
-import {getAllTagList, getTagList, setTagList} from "@/store/article/reducer";
+import { getTagList, setTagList} from "@/store/article/reducer";
 import {getAllTag} from "@/utils/axios";
 import {message} from "antd";
 
