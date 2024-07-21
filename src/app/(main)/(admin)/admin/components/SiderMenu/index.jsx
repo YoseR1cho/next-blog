@@ -20,15 +20,13 @@ const Index = () => {
     }
 
     const handleMenuSelect = (key = '/admin')=>{
-        const menuItem = getMenuItemInMenuListByProperty(menuConfig,'key',pathname)
-
-        console.log(menuItem);
+        const path = key.split('/')[3] === 'update' ?'/admin/article/publish':pathname
+        const menuItem = getMenuItemInMenuListByProperty(menuConfig,'key',path)
 
         dispatch(addTag(menuItem))
     }
 
     useEffect(()=>{
-        const menuItem = getMenuItemInMenuListByProperty(menuConfig,'key',pathname)
         handleMenuSelect(pathname)
     })
 

@@ -11,7 +11,7 @@ const AntdConfigProvider = ({ children }) => {
             theme={{
                 components:{
                     Layout:{
-                        headerBg:'#fff'
+                        headerBg:'#fff',
                     }
                 }
             }}

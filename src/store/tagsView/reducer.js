@@ -7,6 +7,7 @@ const tagsViewSlice = createSlice({
     reducers: {
         addTag(state, action) {
             const tag = action.payload;
+            console.log(tag);
             if (state.tagList.every(item=>item.key !== tag.key)) {
                 state.tagList = [...state.tagList, tag];
             }

@@ -10,12 +10,12 @@ const Index = () => {
     const [title, setTitle] = useState("首页");
 
     useEffect(() => {
-        const menuItem = getMenuItemInMenuListByProperty(
+        const label = pathname.split('/')[3] === 'update' ?'修改文章':getMenuItemInMenuListByProperty(
             menuConfig,
             "key",
             pathname
-        );
-        setTitle(menuItem.label);
+        ).label;
+        setTitle(label);
     });
     return (
         <div
