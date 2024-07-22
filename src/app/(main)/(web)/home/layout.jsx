@@ -23,6 +23,8 @@ const Layout = ({ children }) => {
         queryParams: { pageSize: HOME_PAGESIZE, key: params },
         fetchDependence: [searchParams],
     });
+    console.log(dataList);
+
 
     return (
         <>

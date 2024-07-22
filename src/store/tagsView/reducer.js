@@ -7,8 +7,7 @@ const tagsViewSlice = createSlice({
     reducers: {
         addTag(state, action) {
             const tag = action.payload;
-            console.log(tag);
-            if (state.tagList.every(item=>item.key !== tag.key)) {
+            if (state.tagList.every(item=>item.key !== tag?.key)) {
                 state.tagList = [...state.tagList, tag];
             }
         },
@@ -19,7 +18,7 @@ const tagsViewSlice = createSlice({
             state.tagList = state.tagList.filter(item => item.key === '/admin');
         },
         closeOtherTags(state,action){
-            state.tagList = state.tagList.filter(item=>item.key === '/admin' || item === action.payload)
+            state.tagList = state.tagList.filter(item=>item.key === '/admin' || item.key === action.payload.key)
         }
     },
 });

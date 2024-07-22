@@ -51,6 +51,7 @@ const TagList = () => {
         router.push(path);
     };
     const openContextMenu = (tag, event) => {
+        console.log(tag);
         event.preventDefault();
         const menuMinWidth = 105;
         const clickX = event.clientX;
@@ -74,7 +75,6 @@ const TagList = () => {
             contextMenuContainer.current.contains(event.target)
         );
 
-        console.log(isOutside,menuVisible)
         if (isOutside && menuVisible) {
             closeContextMenu();
         }

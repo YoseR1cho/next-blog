@@ -9,9 +9,15 @@ const AntdConfigProvider = ({ children }) => {
         <ConfigProvider
             locale={zhCN}
             theme={{
+                token:{
+                    colorPrimary:'#1fa67b'
+                },
                 components:{
                     Layout:{
                         headerBg:'#fff',
+                    },
+                    Table:{
+                        rowHoverBg:'#d8e6df'
                     }
                 }
             }}
