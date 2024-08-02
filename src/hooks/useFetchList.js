@@ -3,7 +3,6 @@ import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {decodeQuery} from  '@/utils'
 import useMount from '@/hooks/useMount'
 import {getArticleList} from "@/utils/axios";
-import {useSelector} from "react-redux";
 import useCompare from "@/hooks/useCompare";
 
 export default function useFetchList({

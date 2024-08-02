@@ -32,7 +32,7 @@ export const userLogin = (user)=>request.post('/user/login',user)
 export const userRegister = (user)=>request.post('/user/reg',user);
 
 // 验证token
-export const tokenLogin = (token)=>request.get('/user/admin',{
+export const tokenLogin = (token)=>request.get('/user/verify',{
     headers:{
         Authorization:token
     }

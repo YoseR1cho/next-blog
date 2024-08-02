@@ -3,7 +3,7 @@ import React from 'react'
 import styles from './page.module.scss'
 import { Layout } from 'antd'
 import { useRouter} from "next/navigation";
-import Typer from "@/app/(welcome)/Typer";
+import Typer from "./Typer"
 
 const Page = ({}) => {
     const router = useRouter()

@@ -10,9 +10,9 @@ export default function Authadmin({children}) {
     const router = useRouter()
     const role = useSelector(store=>store.user.role);
     React.useEffect(() => {
+        dispatch(fetchToken())
         const asyncGet = async ()=>{
             try {
-                await dispatch(fetchToken())
 
                 if(role!==0){
                     router.push('/home')

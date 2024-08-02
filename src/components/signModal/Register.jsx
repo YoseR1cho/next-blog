@@ -2,7 +2,7 @@ import React from 'react';
 import {message} from "antd";
 import styles from "./styles.module.scss";
 import {useForm} from "react-hook-form";
-import {USERNAMEEXP, PASSWORDEXP, EMAILEXP, SECRET} from '@/utils/config'
+import {USERNAMEEXP, PASSWORDEXP, EMAILEXP} from '@/utils/config'
 import {ExclamationCircleOutlined} from "@ant-design/icons";
 import md5 from "js-md5";
 import {useDispatch} from "react-redux";
@@ -14,7 +14,7 @@ const Register = ({setOpen}) => {
     const dispatch = useDispatch();
     const handleRegister = (data)=>{
         const {username,password,email} = data;
-        const decrypt = md5(password,SECRET);
+        const decrypt = md5(password,process.env.NEXT_PUBLIC_ACCESS_TOKEN_SECRET);
         const res = dispatch(fetchRegister({username,password:decrypt,email}));
         res.then(()=>{
             message.success('注册成功，请登录~')

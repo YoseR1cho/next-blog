@@ -21,6 +21,10 @@ let articleSchema = new mongoose.Schema({
         type:Number,
         default:0
     },
+    topic:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'topics'
+    },
     createAt:Date
 })
 

@@ -6,7 +6,6 @@ import SideBar from '@/app/(main)/(web)/components/sideBar'
 import Header from "@/app/(main)/(web)/components/header";
 import {fetchToken} from "@/store/user/actionCreators";
 import {useDispatch} from "react-redux";
-import Spin from '@/components/spin'
 
 const {  Content, Footer } = Layout;
 const sideLayout = { xxl: 5, xl: 5, lg: 5, sm: 0, xs: 0 }
