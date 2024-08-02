@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import {  Table, Tag } from "antd";
 import dayjs from "dayjs";
@@ -6,7 +8,7 @@ import BlueButton from "@/components/button/BlueButton";
 import {useRouter} from "next/navigation";
 import TopicModal from "@/app/(main)/(admin)/admin/article/list/TopicModal";
 
-const ArticleTable = ({ data, loading }) => {
+const TopicTable = ({ data, loading }) => {
     const router = useRouter();
     const [isModalOpen,setIsModalOpen] = React.useState(false)
 
@@ -16,37 +18,14 @@ const ArticleTable = ({ data, loading }) => {
 
     const columns = [
         {
-            title: "标题",
+            title: "主题",
             dataIndex: "title",
             key: "title",
             width: "250px",
             align: "center",
-        },
-        {
-            title: <div style={{ textAlign: "center" }}>描述</div>,
-            dataIndex: "summary",
-            key: "summary",
-        },
-        {
-            title: "Tags",
-            key: "tags",
-            dataIndex: "tags",
-            align: "center",
-            render: (_, { tags }) => (
-                <>
-                    {tags.map(tag => {
-                        let color = tag.length > 5 ? "geekblue" : "green";
-                        if (tag === "loser") {
-                            color = "volcano";
-                        }
-                        return (
-                            <Tag color={color} key={tag.name}>
-                                {tag.name}
-                            </Tag>
-                        );
-                    })}
-                </>
-            ),
+            render:(text)=>{
+                return <span style={{fontSize:'18px',fontWeight:'800'}}></span>
+            }
         },
         {
             title: "访问量",
@@ -94,4 +73,4 @@ const ArticleTable = ({ data, loading }) => {
     );
 };
 
-export default ArticleTable;
+export default TopicTable;

@@ -1,7 +1,7 @@
 'use client'
 import React, {forwardRef, useEffect, useRef} from 'react';
 import {Form, Input, Button, Select, Tag, message, Spin} from 'antd'
-import {notificate} from "@/components/notification";
+
 import styles from '../page.module.scss'
 import {useSelector} from "react-redux";
 import useAjaxLoading from "@/hooks/useAjaxLoading";

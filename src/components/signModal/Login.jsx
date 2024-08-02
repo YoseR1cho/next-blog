@@ -4,18 +4,17 @@ import { message} from "antd";
 
 import {useForm} from "react-hook-form";
 import md5 from 'js-md5'
-import {PASSWORDEXP, SECRET, USERNAMEEXP} from "@/utils/config";
+import {PASSWORDEXP, USERNAMEEXP} from "@/utils/config";
 import {fetchLogin} from "@/store/user/actionCreators";
 import {useDispatch} from "react-redux";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
-import {debounce, throttle} from "@/utils";
 
 const Login = ({setOpen,loading}) => {
     const {register,handleSubmit,formState:{errors},reset} = useForm();
     const dispatch = useDispatch();
 
     const handlerLogin = async (data)=>{
-        const decrypt = md5(data.password,SECRET);
+        const decrypt = md5(data.password,process.env.NEXT_PUBLIC_ACCESS_TOKEN_SECRET);
         try {
             await dispatch(fetchLogin({username:data.username,password:decrypt}))
             message.success(`欢迎回来!`)

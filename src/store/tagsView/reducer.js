@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getToken, setToken as _setToken, removeToken } from "@/utils/token";
 
 const tagsViewSlice = createSlice({
     name: "tagsView",

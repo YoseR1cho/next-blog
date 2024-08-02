@@ -2,7 +2,7 @@
 import React, { Suspense, useRef } from "react";
 import styles from "./page.module.scss";
 
-import Spin from "@/components/spin";
+import Spin from "@/components/spin/index"
 import WebPagination from "@/app/(main)/(web)/components/pagination";
 import List from "./List";
 
@@ -23,7 +23,6 @@ const Layout = ({ children }) => {
         queryParams: { pageSize: HOME_PAGESIZE, key: params },
         fetchDependence: [searchParams],
     });
-    console.log(dataList);
 
 
     return (

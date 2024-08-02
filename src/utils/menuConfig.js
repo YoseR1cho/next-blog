@@ -1,5 +1,5 @@
 import {
-    ApiOutlined,
+    ApiOutlined, BlockOutlined,
     EditOutlined,
     FormOutlined,
     HomeOutlined,
@@ -39,6 +39,11 @@ const menuConfig = [
                 label:'发布文章',
                 key:'/admin/article/publish',
                 icon:<EditOutlined />
+            },
+            {
+                label:'主题管理',
+                key:'/admin/article/topic',
+                icon:<BlockOutlined />
             }
         ]
     },

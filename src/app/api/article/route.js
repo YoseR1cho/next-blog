@@ -2,15 +2,15 @@ import { NextResponse } from "next/server";
 import connectToDatabase from "@/utils/mongodb";
 import articles from "@/models/articles";
 import topics from "@/models/topics";
+import { apiHandler } from "@/utils/helpers/api/api-handler";
 
 connectToDatabase();
 
-export async function GET(req) {
+const getArticleList = async req => {
     const _page = req.nextUrl.searchParams.get("page");
     const _pageSize = req.nextUrl.searchParams.get("pageSize");
     const tag = req.nextUrl.searchParams.get("key[tag]");
     const topicId = req.nextUrl.searchParams.get("key[tId]");
-    console.log(topicId);
     try {
         const page = parseInt(_page) || 1;
         const pageSize = parseInt(_pageSize) || 10;
@@ -34,24 +34,24 @@ export async function GET(req) {
                               {
                                   $match: {
                                       $expr: {
-                                          $eq:["$_id","articleId"]
+                                          $eq: ["$_id", "articleId"],
                                       },
                                   },
                               },
                           ],
-                          as:'topics'
+                          as: "topics",
                       },
                   },
-                {
-                    $facet: {
-                        articleData: [
-                            { $sort: { createAt: -1 } },
-                            { $skip: skip },
-                            { $limit: pageSize },
-                        ],
-                        totalCount: [{ $count: "totalCount" }],
-                    },
-                },
+                  {
+                      $facet: {
+                          articleData: [
+                              { $sort: { createAt: -1 } },
+                              { $skip: skip },
+                              { $limit: pageSize },
+                          ],
+                          totalCount: [{ $count: "totalCount" }],
+                      },
+                  },
               ])
             : await articles.aggregate([
                   {
@@ -96,31 +96,41 @@ export async function GET(req) {
             { status: 500 }
         );
     }
-}
+};
 
-export async function POST(req) {
-    try {
-        const body = await req.json();
-        const data = await articles.create({
-            ...body,
-        });
+const postArticle = apiHandler(
+    async req => {
+        try {
+            const body = await req.json();
+            const data = await articles.create({
+                ...body,
+            });
 
-        return NextResponse.json(
-            {
-                message: "发布文章成功！",
-                data: data,
-                success: true,
-            },
-            { status: 200 }
-        );
-    } catch (error) {
-        return NextResponse.json(
-            {
-                message: "发布文章失败！",
-                success: false,
-                errorMsg: error,
-            },
-            { status: 500 }
-        );
+            return NextResponse.json(
+                {
+                    message: "发布文章成功！",
+                    data: data,
+                    success: true,
+                },
+                { status: 200 }
+            );
+        } catch (error) {
+            return NextResponse.json(
+                {
+                    message: "发布文章失败！",
+                    success: false,
+                    errorMsg: error,
+                },
+                { status: 500 }
+            );
+        }
+    },
+    {
+        isJwt: true,
+        identity: "manager",
     }
-}
+);
+
+export const GET = getArticleList;
+
+export const POST = postArticle;

@@ -1,7 +1,6 @@
 import connectToDatabase from "@/utils/mongodb";
 import users from "@/models/users";
 import {NextResponse} from "next/server";
-import {SECRET} from "@/utils/config";
 
 connectToDatabase()
 export async function POST(req){
@@ -26,7 +25,7 @@ export async function POST(req){
             role,
             avatar:avatar || ''
         }
-        let token =jwt.sign(user,SECRET,{
+        let token =jwt.sign(user,process.env.NEXT_PUBLIC_ACCESS_TOKEN_SECRET,{
             expiresIn: 60*60*24*3
         });
 

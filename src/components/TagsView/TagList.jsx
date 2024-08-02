@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import styles from "./style.module.scss";
 
-import {  useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
     deleteTag,
     emptyTagList,
@@ -14,7 +14,7 @@ import { usePathname, useRouter } from "next/navigation";
 const TagList = () => {
     const [position, setPosition] = useState({ left: 0, top: 0 });
     const [menuVisible, setMenuVisible] = useState(false);
-    const [currentTag, setCurrentTag] = useState();
+    const [currentTag, setCurrentTag] = useState({});
 
     const tagListContainer = useRef();
     const contextMenuContainer = useRef();
@@ -51,8 +51,8 @@ const TagList = () => {
         router.push(path);
     };
     const openContextMenu = (tag, event) => {
-        console.log(tag);
         event.preventDefault();
+        event.stopPropagation()
         const menuMinWidth = 105;
         const clickX = event.clientX;
         const clickY = event.clientY; //事件发生时鼠标的Y坐标
@@ -75,7 +75,7 @@ const TagList = () => {
             contextMenuContainer.current.contains(event.target)
         );
 
-        if (isOutside && menuVisible) {
+        if (isOutside) {
             closeContextMenu();
         }
     };
@@ -97,9 +97,12 @@ const TagList = () => {
 
     useEffect(() => {
         document.body.addEventListener("click", handleClickOutside);
+        document.body.addEventListener("contextmenu", handleClickOutside);
 
-        return () =>
+        return () =>{
             document.body.removeEventListener("click", handleClickOutside);
+            document.body.removeEventListener("contextmenu", handleClickOutside);
+        }
     }, []);
 
     return (
@@ -124,15 +127,15 @@ const TagList = () => {
                     {tagList?.map(tag => (
                         <li key={tag.key}>
                             <Tag
-                                onClose={()=>handleClose(tag)}
-                                closable={tag.key !== "/admin"}
+                                onClose={() => handleClose(tag)}
+                                closable={tag?.key !== "/admin"}
                                 color={
                                     currentPath === tag.key
                                         ? "geekblue"
                                         : "gold"
                                 }
-                                onClick={()=>handleClick(tag.key)}
-                                onContextMenu={(e)=>openContextMenu(tag,e)}
+                                onClick={() => handleClick(tag.key)}
+                                onContextMenu={e => openContextMenu(tag, e)}
                             >
                                 {tag.label}
                             </Tag>
@@ -143,7 +146,10 @@ const TagList = () => {
             {menuVisible ? (
                 <ul
                     className={styles.contextmenu}
-                    style={{ left: `${position.left}px`, top: `${position.top}px` }}
+                    style={{
+                        left: `${position.left}px`,
+                        top: `${position.top}px`,
+                    }}
                     ref={contextMenuContainer}
                 >
                     <li onClick={handleCloseOtherTags}>关闭其他</li>

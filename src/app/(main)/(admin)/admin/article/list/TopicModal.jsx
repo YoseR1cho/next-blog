@@ -1,6 +1,5 @@
 import React from 'react';
-import {Button, Col, Modal, Select} from "antd";
-import GreenButton from "@/components/button/GreenButton";
+import {Button, Modal, Select} from "antd";
 import BlueButton from "@/components/button/BlueButton";
 
 const TopicModal = ({isModalOpen,setModalOpen}) => {
@@ -18,11 +17,13 @@ const TopicModal = ({isModalOpen,setModalOpen}) => {
                     <Select
                         style={{
                             margin:"30px auto",
-                            minWidth:'170px'
+                            minWidth:'170px',
+                            left:"50%",
+                            transform:"translateX(-50%)"
                         }}
                         onCancel={handleCancel}
                         showSearch
-                        placeholder="Select a person"
+                        placeholder="请选择专题"
                         optionFilterProp="label"
                         options={[
                             {

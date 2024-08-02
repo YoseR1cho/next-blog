@@ -1,11 +1,12 @@
 import articles from "@/models/articles";
 import {NextResponse} from "next/server";
 import connectToDatabase from "@/utils/mongodb";
+import {apiHandler} from "@/utils/helpers/api/api-handler";
 
 connectToDatabase()
 
 //获取单篇文章
-export async function GET(req,{params}){
+const getArticle = async (req,{params})=>{
     try {
         const id = params.id;
         const data = await articles.find({_id:id}).populate().exec()
@@ -26,7 +27,7 @@ export async function GET(req,{params}){
 }
 
 //修改单篇文章
-export async function PATCH(req,{params}){
+const patchArticle = apiHandler(async(req,{params})=>{
     try {
         const id = params.id;
         const body = await req.json()
@@ -44,10 +45,13 @@ export async function PATCH(req,{params}){
             errorMsg:error
         },{status:500})
     }
-}
+},{
+    isJwt:true,
+    identity:'manager'
+})
 
 //删除单篇文章
-export async function DELETE(req,{params}){
+const deleteArticle = apiHandler(async (req,{params})=>{
     try {
         let id = params.id;
         const data = await articles.deleteOne({_id:id})
@@ -64,4 +68,13 @@ export async function DELETE(req,{params}){
             errorMsg:error
         },{status:500})
     }
-}
+},{
+    isJwt:true,
+    identity:'manager'
+})
+
+export const GET = getArticle
+
+export const PATCH = patchArticle
+
+export const DELETE = deleteArticle

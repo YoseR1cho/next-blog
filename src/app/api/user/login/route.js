@@ -2,7 +2,7 @@ import users from "@/models/users";
 import {NextResponse} from "next/server";
 import connectToDatabase from "@/utils/mongodb";
 import jwt from "jsonwebtoken";
-import {SECRET} from "@/utils/config";
+import {auth} from "@/utils/helpers/auth";
 
 connectToDatabase()
 export async function POST(req){
@@ -12,28 +12,24 @@ export async function POST(req){
         let {username,password} = await req.json()
         const data = await users.findOne({username,password})
 
+
         if(!data){
             return NextResponse.json({
                 errorMsg:'用户名或密码错误！',
                 success:false
             }, {status: 400})
         }
-
-        const {_id:id,role,avatar} =data;
         //创建当前用户的token
-        const user ={
-            username,
-            id,
-            role,
-            avatar:avatar || ''
-        }
-        let token =jwt.sign(user,SECRET,{
+
+        let token = auth.createAccessToken({id:data._id})
+        /*let token =jwt.sign({id:data._id},process.env.NEXT_PUBLIC_ACCESS_TOKEN_SECRET,{
             expiresIn: 60*60*24*3
-        });
+        });*/
+
 
         return NextResponse.json({
             message:'登录成功!',
-            data: {token,id,role,avatar},
+            data: {...data,token,password:null},
             success:true
         },{status:200})
     }catch (error){
