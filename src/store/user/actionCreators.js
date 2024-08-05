@@ -1,6 +1,6 @@
 import { userLogin, userRegister, tokenLogin } from "@/utils/axios";
 import { setUser, removeUser } from "@/store/user/reducer";
-import { getToken, removeToken } from "@/utils/token";
+import { getToken, removeToken,setToken,setRefreshToken } from "@/utils/token";
 import { message } from "antd";
 
 export const fetchLogin = values => {
@@ -8,9 +8,18 @@ export const fetchLogin = values => {
     return async dispatch => {
         try {
             const res = await userLogin({ username, password });
-            const { id, token, role, avatar } = res.data;
+            const { id, token, role, avatar, refreshToken } = res.data;
+
+            setToken(token)
+            setRefreshToken(refreshToken)
+
             dispatch(
-                setUser({ token, username, id, role, avatar: avatar || "" })
+                setUser({
+                    username,
+                    id,
+                    role,
+                    avatar: avatar || "",
+                })
             );
         } catch (err) {
             throw err;
@@ -34,7 +43,7 @@ export const fetchToken = () => {
         try {
             const token = getToken();
             if (token) {
-                const res = await tokenLogin(token);
+                const res = await tokenLogin();
 
                 dispatch(
                     setUser({
@@ -46,7 +55,7 @@ export const fetchToken = () => {
             }
         } catch (e) {
             message.error("身份认证失败！");
-            removeToken();
+            // removeToken();
         }
     };
 };
