@@ -24,7 +24,7 @@ const createAccessToken = payload => {
         payload,
         process.env.NEXT_PUBLIC_ACCESS_TOKEN_SECRET,
         {
-            expiresIn: 10,
+            expiresIn: 60 * 60 * 24 * 3,
         }
     );
 };
