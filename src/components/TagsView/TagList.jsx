@@ -130,7 +130,7 @@ const TagList = () => {
                                 onClose={() => handleClose(tag)}
                                 closable={tag?.key !== "/admin"}
                                 color={
-                                    currentPath === tag.key
+                                    currentPath === tag?.key
                                         ? "geekblue"
                                         : "gold"
                                 }

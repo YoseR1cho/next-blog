@@ -2,7 +2,7 @@ import {useCallback, useEffect, useState} from "react";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {decodeQuery} from  '@/utils'
 import useMount from '@/hooks/useMount'
-import {getArticleList} from "@/utils/axios";
+import {getArticleList} from "@/utils/apis/article";
 import useCompare from "@/hooks/useCompare";
 
 export default function useFetchList({

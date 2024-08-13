@@ -6,12 +6,10 @@ import {message} from "antd";
 import Image from "next/image";
 import React, {useEffect, useId, useRef} from "react";
 import {CopyOutlined, DeleteOutlined, RedoOutlined, SendOutlined} from "@ant-design/icons";
-import {debounce} from "@/utils";
 
 export default function Page(){
     const user = useSelector(store=>store.user)
     const btnRef = useRef()
-    const textRef = useRef()
     const { messages, input, handleInputChange, handleSubmit, setMessages ,reload } = useChat({
             api:'api/chat'
     });

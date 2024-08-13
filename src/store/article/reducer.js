@@ -13,12 +13,12 @@ const articleSlice = createSlice({
             let tagList = generateColor(action.payload)
             state.tagList = tagList;
         },
-        setTagList(state,action){
-            state.tagList = action.payload
+        deleteTag(state,action){
+            state.tagList = state.tagList.filter(tag=>tag.id === action.payload)
         }
     }
 })
 
 export const {reducer:articleReducer} = articleSlice;
 
-export const {getTagList,setTagList} = articleSlice.actions
+export const {getTagList,deleteTag} = articleSlice.actions

@@ -5,7 +5,7 @@ import {NextResponse} from "next/server";
 
 const openai = createOpenAI({
     apiKey: process.env.OPENAI_API_KEY || '',
-    baseURL: "https://35.yunai.xyz/v1"
+    baseURL: "https://api.wumingai.com"
 })
 
 export const maxDuration = 30;

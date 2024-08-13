@@ -6,7 +6,7 @@ import '@toast-ui/editor/dist/i18n/zh-cn'
 import { Editor } from '@toast-ui/react-editor';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight-all.js';
 import {message} from "antd";
-import {uploadImg} from "@/utils/api";
+import {uploadImg} from "@/utils/apis/upload";
 import Spin from "@/components/spin";
 
 const MyEditor =({onchange,editorRef}) => {

@@ -91,7 +91,7 @@ const getArticleList = async req => {
             {
                 message: "获取文章失败！",
                 success: false,
-                errorMsg: error,
+                errorMsg: error.message,
             },
             { status: 500 }
         );
@@ -119,7 +119,7 @@ const postArticle = apiHandler(
                 {
                     message: "发布文章失败！",
                     success: false,
-                    errorMsg: error,
+                    errorMsg: error.message,
                 },
                 { status: 500 }
             );

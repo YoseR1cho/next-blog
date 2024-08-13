@@ -74,6 +74,7 @@ const ArticleTable = ({ data, loading }) => {
                 <div>
                     <GreenButton style={{marginRight:'1rem'}} onClick={()=>router.push(`/admin/article/update/${record._id}`)}>修改文章</GreenButton>
                     <BlueButton onClick={handleModalOpen}>专题设置</BlueButton>
+                    <TopicModal isModalOpen={isModalOpen} setModalOpen={setIsModalOpen} articleId={record._id}/>
                 </div>
             ),
         },
@@ -89,7 +90,6 @@ const ArticleTable = ({ data, loading }) => {
                     bordered
                 />
             </div>
-            <TopicModal isModalOpen={isModalOpen} setModalOpen={setIsModalOpen}/>
         </>
     );
 };

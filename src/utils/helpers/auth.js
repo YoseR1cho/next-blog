@@ -2,13 +2,12 @@ import jwt from "jsonwebtoken";
 
 const verifyToken = async (req, isJwt) => {
     try {
-        const token = req.headers.get("Authorization").split(" ")[1] || "";
+        const token = req.headers.get("Authorization")?.split(" ")[1] || "";
         const decoded = jwt.verify(
             token,
             process.env.NEXT_PUBLIC_ACCESS_TOKEN_SECRET,
             ["HS256"]
         );
-        console.log(decoded)
         const id = decoded.id;
 
         return new Promise(resolve => resolve(id));

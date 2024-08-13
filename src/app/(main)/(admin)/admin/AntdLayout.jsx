@@ -79,8 +79,8 @@ const App = ({ children }) => {
                             background: colorBgContainer,
                         }}
                     >
-                        <Title />
-                        <div style={{ padding: 24 }}>{children}</div>
+
+                        {children}
                     </div>
                 </Content>
             </Layout>

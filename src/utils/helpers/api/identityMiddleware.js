@@ -6,9 +6,10 @@ const identityMiddleware = async (
     isJwt = false
 ) => {
     if(!isJwt || identity === 'visitor')    return;
-
     const userId = req.headers.get('userId')
-    const user = (await users.findOne({id:userId}))._doc
+    const user = await users.findOne({_id:userId})
+
+    console.log(user);
 
     req.headers.set('userRole',user.role)
 

@@ -1,6 +1,6 @@
-import { getTagList, setTagList} from "@/store/article/reducer";
-import {getAllTag} from "@/utils/axios";
-import {message} from "antd";
+import { getTagList, deleteTag as _deleteTag} from "@/store/article/reducer";
+import { getAllTag } from "@/utils/apis/tag";
+import {deleteOneTag} from "@/utils/apis/tag";
 
 export const getTags = ()=>{
     return async dispatch=>{
@@ -14,20 +14,18 @@ export const getTags = ()=>{
             })
             dispatch(getTagList(list))
         }catch (e){
-            message.error('标签获取失败！')
-            console.log(e)
+            throw new Error(e)
         }
 
     }
 }
 
 export const deleteTag = (id)=>{
-    return async (dispatch,getState)=>{
+    return async (dispatch)=>{
         try {
-            const tagList = getState().article.tagList
-            console.log(tagList);
-            const newTagList = tagList.filter(item=>item.id!==id)
-            dispatch(setTagList(newTagList))
+            await deleteOneTag(id)
+
+            dispatch(_deleteTag(id))
         }catch (e){
             throw new Error(e)
         }

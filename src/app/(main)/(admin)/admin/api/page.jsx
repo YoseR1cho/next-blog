@@ -3,7 +3,7 @@ import React from 'react';
 
 const Page = () => {
     return (
-        <div>
+        <div className='app-container'>
             待开发。。。
         </div>
     );

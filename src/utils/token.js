@@ -1,6 +1,6 @@
 import cookie from "react-cookies";
 import {LOGINCOOKIE, LOGINREFRESHTOKEN} from "@/utils/config";
-import {refreshToken as _refreshToken} from "@/utils/axios";
+import {refreshToken as _refreshToken} from "@/utils/apis/user";
 
 function setToken(token){
     cookie.save(LOGINCOOKIE,token,{path:'/',expires:new Date(new Date().getTime()+60*1000*60*24*3)})

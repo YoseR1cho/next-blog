@@ -2,8 +2,9 @@ import React, { useRef } from "react";
 import styles from "./style.module.scss";
 import Link from "next/link";
 import {useParams} from "next/navigation";
+import {useSelector} from "react-redux";
 
-const topics = [
+/*const topics = [
     {
         title: "前端面试",
         id: 1,
@@ -24,11 +25,14 @@ const topics = [
         title: "项目笔记",
         id: 5,
     },
-];
+];*/
 
 const Index = () => {
+    const topics = useSelector(store=>store.topic).topicList
     const listRef = useRef();
     const params = useParams()
+
+    console.log(topics)
     return (
         <div className={styles.container}>
             <div className={styles.title}>
@@ -60,8 +64,8 @@ const Index = () => {
             <ul className={styles.list_container} ref={listRef}>
                 {topics.map(item => {
                     return (
-                        <li key={item.id} className={(params && +(params.tId) === item.id)?styles.focused:''}>
-                            <Link href={`/home/topic/${item.id}`}>
+                        <li key={item._id} className={(params && params.tId === item._id)?styles.focused:''}>
+                            <Link href={`/home/topic/${item._id}`}>
                                 {item.title}
                             </Link>
                         </li>

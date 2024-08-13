@@ -1,9 +1,8 @@
 'use client'
 import React from 'react';
-import {Layout, theme} from "antd";
-import View from "@/app/(main)/(admin)/admin/components/View";
-const { Content ,Footer} = Layout;
+import dynamic from "next/dynamic";
 
+const View = dynamic(()=>import("@/app/(main)/(admin)/admin/components/View"))
 const Page = () => {
 
     return (

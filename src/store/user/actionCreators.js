@@ -1,4 +1,4 @@
-import { userLogin, userRegister, tokenLogin } from "@/utils/axios";
+import { userLogin, userRegister, tokenLogin } from "@/utils/apis/user";
 import { setUser, removeUser } from "@/store/user/reducer";
 import { getToken, removeToken,setToken,setRefreshToken } from "@/utils/token";
 import { message } from "antd";

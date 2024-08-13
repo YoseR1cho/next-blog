@@ -41,7 +41,7 @@ const menuConfig = [
                 icon:<EditOutlined />
             },
             {
-                label:'主题管理',
+                label:'专题管理',
                 key:'/admin/article/topic',
                 icon:<BlockOutlined />
             }
