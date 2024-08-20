@@ -15,7 +15,6 @@ export default function useFetchList({
     const [pagination,setPagination] = useState({current:1,pageSize:10,total:0});
 
     const router = useRouter()
-    const searchParams = useSearchParams().toString()
     const pathname = usePathname()
 
     useMount(()=>{
@@ -26,7 +25,7 @@ export default function useFetchList({
 
     useEffect(()=>{
         if(fetchDependence.length>0){
-            const params = decodeQuery(searchParams || '')
+            const params = decodeQuery(fetchDependence.searchParams || '')
             fetchWithLoading(params)
         }
     },[useCompare(fetchDependence),useCompare(queryParams)])
@@ -64,8 +63,8 @@ export default function useFetchList({
     const handlePageChange = useCallback(
         (page, pageSize) => {
             // return
-            const search = searchParams.includes('page=')
-                ? searchParams.replace(/(page=)(\d+)/, `?$1${page}`).replace(/(pageSize=)(\d+)/, `pageSize=${pageSize}`)
+            const search = fetchDependence.searchParams.includes('page=')
+                ? fetchDependence.searchParams.replace(/(page=)(\d+)/, `?$1${page}`).replace(/(pageSize=)(\d+)/, `pageSize=${pageSize}`)
                 : `?page=${page}&pageSize=${pageSize}`
             const jumpUrl = pathname + search
             router.push(jumpUrl)

@@ -21,6 +21,7 @@
     "antd": "^5.17.2",
     "axios": "^1.6.8",
     "cloudinary": "^2.2.0",
+    "css-minimizer-webpack-plugin": "^7.0.0",
     "dayjs": "^1.11.11",
     "depcheck": "^1.4.7",
     "dotenv": "^16.4.5",

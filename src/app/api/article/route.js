@@ -115,6 +115,7 @@ const postArticle = apiHandler(
                 { status: 200 }
             );
         } catch (error) {
+            console.log(error)
             return NextResponse.json(
                 {
                     message: "发布文章失败！",

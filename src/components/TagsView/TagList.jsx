@@ -124,13 +124,13 @@ const TagList = () => {
                 )}
             >
                 <ul className={styles.tags_wrap} ref={tagListContainer}>
-                    {tagList?.map(tag => (
+                    {(tagList && tagList[0]?.key) && tagList.map(tag => (
                         <li key={tag.key}>
                             <Tag
                                 onClose={() => handleClose(tag)}
                                 closable={tag?.key !== "/admin"}
                                 color={
-                                    currentPath === tag?.key
+                                    currentPath === tag.key
                                         ? "geekblue"
                                         : "gold"
                                 }
