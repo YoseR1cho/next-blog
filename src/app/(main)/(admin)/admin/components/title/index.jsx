@@ -41,7 +41,7 @@ const Index = ({ isCollapsed = false, extra = <></> }) => {
 
     return (
         <>
-            {!isCollapsed ? (
+            {isCollapsed ? (
                 <Collapse
                     style={styles}
                     defaultActiveKey={["1"]}

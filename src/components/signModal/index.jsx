@@ -1,11 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {Modal} from 'antd';
+import React, {useState} from 'react';
+import dynamic from "next/dynamic";
 import styles from './styles.module.scss'
-import Login from "./Login";
-import Register from "./Register";
-import {useDispatch, useSelector} from "react-redux";
+import {Modal} from "antd";
 import {LoginOutlined} from "@ant-design/icons";
 import useAjaxLoading from "@/hooks/useAjaxLoading";
+
+const Login = dynamic(()=>import('./Login'))
+const Register = dynamic(()=>import('./Register'))
 
 const App = () => {
     const [open, setOpen] = useState(false);

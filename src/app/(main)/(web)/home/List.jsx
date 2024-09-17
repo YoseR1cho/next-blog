@@ -3,7 +3,7 @@ import styles from './page.module.scss'
 import { Divider } from 'antd'
 import {useRouter} from "next/navigation";
 import {EyeOutlined, HeartOutlined} from "@ant-design/icons";
-import moment from 'moment'
+import dayjs from "dayjs";
 
 const List = ({list}) => {
     const router = useRouter();
@@ -35,7 +35,7 @@ const List = ({list}) => {
                                 <HeartOutlined /> 0
                             </div>
                             <div>
-                                {moment(item.createAt).format('YYYY-MM-DD HH:MM:ss')}
+                                {dayjs(item.createAt).format('YYYY-MM-DD HH:MM:ss')}
                             </div>
                         </div>
                     </li>

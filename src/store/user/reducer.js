@@ -10,7 +10,6 @@ const userSlice = createSlice({
                 state[key] = action.payload[key]
             })
             state.isLogin = true;
-            _setToken(action.payload.token);
         },
         removeUser(state,action){
             state.username='';

@@ -6,9 +6,9 @@ import styles from '../../page.module.scss'
 import {useSelector} from "react-redux";
 import useAjaxLoading from "@/hooks/useAjaxLoading";
 import {debounce, idTranslate2Tag, tagTranslate} from '@/utils'
-import {patchArticle, publishArticle} from "@/utils/axios";
+import {patchArticle} from "@/utils/apis/article";
 import {useParams, useRouter} from "next/navigation";
-import {getArticle} from "@/utils/api";
+import {getArticle} from "@/utils/apis/article";
 import dynamic from "next/dynamic";
 
 const Editor = dynamic(()=>import("@/app/(main)/(admin)/admin/components/editor"),{ssr:false})
@@ -99,81 +99,83 @@ const Page = () => {
     }, []);
 
     return (
-        <Spin spinning={loading}>
-            {contextHolder}
-            <Form
-                className={styles.form}
-                form={form}
-                onFinish={onFinish}
-            >
-                <Form.Item
-                    label='文章标题'
-                    name='title'
-                    className={styles.formItem}
-                    rules={[
-                        {
-                            message:'请输入您的标题'
-                        }
-                    ]}
+        <div className='app-container'>
+            <Spin spinning={loading}>
+                {contextHolder}
+                <Form
+                    className={styles.form}
+                    form={form}
+                    onFinish={onFinish}
                 >
-                    <Input
-                        size={"large"}
+                    <Form.Item
+                        label='文章标题'
+                        name='title'
+                        className={styles.formItem}
+                        rules={[
+                            {
+                                message:'请输入您的标题'
+                            }
+                        ]}
+                    >
+                        <Input
+                            size={"large"}
 
-                    />
-                </Form.Item>
-                <Form.Item
-                    label='文章摘要'
-                    name='summary'
-                    className={styles.formItem}
-                    rules={[
-                        {
-                            message:'请输入您的摘要'
-                        }
-                    ]}
-                >
-                    <Input
-                        size={"large"}
-                        maxLength={100}
-                        showCount
-                    />
-                </Form.Item>
-                <Form.Item
-                    label='选择标签'
-                    name='tags'
-                    className={styles.formItem}
-                >
-                    <Select
-                        mode="multiple"
-                        tagRender={tagRender}
-                        style={{
-                            width: '100%',
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        label='文章摘要'
+                        name='summary'
+                        className={styles.formItem}
+                        rules={[
+                            {
+                                message:'请输入您的摘要'
+                            }
+                        ]}
+                    >
+                        <Input
+                            size={"large"}
+                            maxLength={100}
+                            showCount
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        label='选择标签'
+                        name='tags'
+                        className={styles.formItem}
+                    >
+                        <Select
+                            mode="multiple"
+                            tagRender={tagRender}
+                            style={{
+                                width: '100%',
+                            }}
+                            options={options}
+                            size='large'
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name='content'
+                    >
+                        <ForwardRefEditor
+                            onchange={contentHandler}
+                            editorRef={editorRef}
+                        />
+                    </Form.Item>
+
+                    <Form.Item
+                        wrapperCol={{
+                            offset:11
                         }}
-                        options={options}
-                        size='large'
-                    />
-                </Form.Item>
-                <Form.Item
-                    name='content'
-                >
-                    <ForwardRefEditor
-                        onchange={contentHandler}
-                        editorRef={editorRef}
-                    />
-                </Form.Item>
-
-                <Form.Item
-                    wrapperCol={{
-                        offset:11
-                    }}
-                >
-                    <Button
-                        className={styles.button}
-                        htmlType="submit"
-                        loading={loading}
-                    >修改</Button>
-                </Form.Item>
-            </Form>
-        </Spin>
+                    >
+                        <Button
+                            className={styles.button}
+                            htmlType="submit"
+                            loading={loading}
+                        >修改</Button>
+                    </Form.Item>
+                </Form>
+            </Spin>
+        </div>
     );
 };
 

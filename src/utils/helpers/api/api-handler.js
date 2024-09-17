@@ -3,6 +3,7 @@ import {identityMiddleware} from "@/utils/helpers/api/identityMiddleware";
 import {validateMiddleware} from "@/utils/helpers/api/validateMiddleware";
 import {NextResponse} from "next/server";
 import {errorHandler} from "@/utils/helpers/api/error-handler";
+import connectToDatabase from "@/utils/mongodb";
 
 function isPublicPath(req) {
     const publicPaths = [
@@ -19,6 +20,7 @@ function isPublicPath(req) {
 function apiHandler(handler, { identity, schema, isJwt }) {
     return async (req, ...args) => {
         try {
+            connectToDatabase();
             if (!isPublicPath(req)) {
                 // 执行中间件
                 await jwtMiddleware(req, isJwt);

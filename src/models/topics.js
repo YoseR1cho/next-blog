@@ -5,9 +5,13 @@ let topicSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    articleIds:{
-        type:Array,
-        required:true
+    views:{
+        type:Number,
+        default:0
+    },
+    articleIds: {
+        type: Array,
+        required: true
     }
 })
 topicSchema.pre("save",function (next){

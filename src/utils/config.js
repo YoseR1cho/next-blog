@@ -7,6 +7,8 @@ export const API_URL = "/api";
 
 export const LOGINCOOKIE = "yoseR1cho_blog_tokens";
 
+export const LOGINREFRESHTOKEN = 'yoseR1cho_blog_refreshTokens'
+
 export const USERNAMEEXP = /^[\u4e00-\u9fa5a-zA-Z0-9]{5,15}$/; //用户名正则 5-15个字符
 
 export const PASSWORDEXP = /^(?=.*[a-zA-Z])(?=.*\d).{6,20}$/; //密码正则 6到20个数字+字母

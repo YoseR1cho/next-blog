@@ -8,6 +8,7 @@ function errorHandler(err) {
         return NextResponse.json(
             {
                 errorMsg: err.message,
+                success: false,
             },
             { status }
         );
@@ -18,15 +19,24 @@ function errorHandler(err) {
         return NextResponse.json(
             {
                 errMsg: "Unauthorized",
+                success: false,
             },
             { status: 401 }
         );
+    }
+
+    if (err.name === "TokenExpiredError") {
+        return NextResponse.json({
+            errMsg: "jwt expired",
+            expire:true
+        }, { status: 401 });
     }
 
     if (err.name === "UserExistsError") {
         return NextResponse.json(
             {
                 errorMsg: err.message,
+                success: false,
             },
             { status: 422 }
         );
@@ -36,6 +46,7 @@ function errorHandler(err) {
     return NextResponse.json(
         {
             errorMsg: err.message,
+            success: false,
         },
         { status: 500 }
     );

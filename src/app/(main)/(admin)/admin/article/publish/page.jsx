@@ -6,7 +6,7 @@ import styles from '../page.module.scss'
 import {useSelector} from "react-redux";
 import useAjaxLoading from "@/hooks/useAjaxLoading";
 import {debounce, tagTranslate} from '@/utils'
-import {publishArticle} from "@/utils/axios";
+import {publishArticle} from "@/utils/apis/article";
 import {useRouter} from "next/navigation";
 import dynamic from "next/dynamic";
 
@@ -99,83 +99,85 @@ const Page = () => {
     }, []);
 
     return (
-        <Spin spinning={loading}>
-            <Form
-                className={styles.form}
-                form={form}
-                onFinish={onFinish}
-            >
-                <Form.Item
-                    label='文章标题'
-                    name='title'
-                    className={styles.formItem}
-                    rules={[
-                        {
-                            message:'请输入您的标题'
-                        }
-                    ]}
+        <div className='app-container'>
+            <Spin spinning={loading}>
+                <Form
+                    className={styles.form}
+                    form={form}
+                    onFinish={onFinish}
                 >
-                    <Input
-                        size={"large"}
-                        onChange={()=>formItemTitle('tuiUIEditor_articleTitle',JSON.stringify(form.getFieldValue().title))}
+                    <Form.Item
+                        label='文章标题'
+                        name='title'
+                        className={styles.formItem}
+                        rules={[
+                            {
+                                message:'请输入您的标题'
+                            }
+                        ]}
+                    >
+                        <Input
+                            size={"large"}
+                            onChange={()=>formItemTitle('tuiUIEditor_articleTitle',JSON.stringify(form.getFieldValue().title))}
 
-                    />
-                </Form.Item>
-                <Form.Item
-                    label='文章摘要'
-                    name='summary'
-                    className={styles.formItem}
-                    rules={[
-                        {
-                            message:'请输入您的摘要'
-                        }
-                    ]}
-                >
-                    <Input
-                        size={"large"}
-                        onChange={()=>formItemTitle('tuiUIEditor_articleSummary',JSON.stringify(form.getFieldValue().summary))}
-                        maxLength={100}
-                        showCount
-                    />
-                </Form.Item>
-                <Form.Item
-                    label='选择标签'
-                    name='tags'
-                    className={styles.formItem}
-                >
-                    <Select
-                        mode="multiple"
-                        tagRender={tagRender}
-                        style={{
-                            width: '100%',
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        label='文章摘要'
+                        name='summary'
+                        className={styles.formItem}
+                        rules={[
+                            {
+                                message:'请输入您的摘要'
+                            }
+                        ]}
+                    >
+                        <Input
+                            size={"large"}
+                            onChange={()=>formItemTitle('tuiUIEditor_articleSummary',JSON.stringify(form.getFieldValue().summary))}
+                            maxLength={100}
+                            showCount
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        label='选择标签'
+                        name='tags'
+                        className={styles.formItem}
+                    >
+                        <Select
+                            mode="multiple"
+                            tagRender={tagRender}
+                            style={{
+                                width: '100%',
+                            }}
+                            options={options}
+                            size='large'
+                            onChange={()=>formItemTitle('tuiUIEditor_articleTag',JSON.stringify(form.getFieldValue().tags))}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name='content'
+                    >
+                        <ForwardRefEditor
+                            onchange={contentHandler}
+                            editorRef={editorRef}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        wrapperCol={{
+                            offset:11
                         }}
-                        options={options}
-                        size='large'
-                        onChange={()=>formItemTitle('tuiUIEditor_articleTag',JSON.stringify(form.getFieldValue().tags))}
-                    />
-                </Form.Item>
-                <Form.Item
-                    name='content'
-                >
-                    <ForwardRefEditor
-                        onchange={contentHandler}
-                        editorRef={editorRef}
-                    />
-                </Form.Item>
-                <Form.Item
-                    wrapperCol={{
-                        offset:11
-                    }}
-                >
-                    <Button
-                        className={styles.button}
-                        htmlType="submit"
-                        loading={loading}
-                    >发布</Button>
-                </Form.Item>
+                    >
+                        <Button
+                            className={styles.button}
+                            htmlType="submit"
+                            loading={loading}
+                        >发布</Button>
+                    </Form.Item>
 
-            </Form>
-        </Spin>
+                </Form>
+            </Spin>
+        </div>
     );
 };
 

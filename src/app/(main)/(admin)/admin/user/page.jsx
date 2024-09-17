@@ -4,7 +4,7 @@ import React from "react";
 const Page = () => {
     return (
         <>
-            <div>
+            <div className='app-container'>
                 <p>待开发~~~</p>
             </div>
         </>

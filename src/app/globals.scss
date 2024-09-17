@@ -38,11 +38,18 @@ li {
   background-color:#F5F5F5;
 }
 
+.app-container {
+    padding: 24px;
+}
 
 .ant-modal-title {
   font-size: 20px !important;
   padding-bottom: 4px;
   border-bottom: 1px solid #cccccc;
+}
+
+.ant-modal-mask{
+    background-color: rgba(0, 0, 0, 0.25) !important;
 }
 
 

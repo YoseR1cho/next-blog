@@ -1,9 +1,10 @@
 import tags from "@/models/tags";
 import {NextResponse} from "next/server";
 import connectToDatabase from "@/utils/mongodb";
+import {apiHandler} from "@/utils/helpers/api/api-handler";
 
 connectToDatabase()
-export async function GET(req){
+const getTags = async(req)=>{
     try {
         const data = await tags.find()
         return NextResponse.json({
@@ -20,7 +21,7 @@ export async function GET(req){
     }
 }
 
-export async function POST(req){
+const addTag = apiHandler(async(req)=>{
     try {
         const body = await req.json()
         const data = await tags.create({
@@ -38,4 +39,10 @@ export async function POST(req){
             errorMsg:error
         }, {status: 500})
     }
-}
+},{
+    isJwt:true,
+    identity:'manager'
+})
+
+export const GET = getTags
+export const POST = addTag

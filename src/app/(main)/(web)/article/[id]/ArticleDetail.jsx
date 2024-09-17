@@ -10,10 +10,10 @@ import Navigation from "@/app/(main)/(web)/article/[id]/components/navigation";
 import {Spin} from "antd";
 
 // methods
-import {getArticle} from "@/utils/axios";
+import {getArticle} from "@/utils/apis/article";
 import {useParams,useRouter} from "next/navigation";
 import Markdown from "@/app/(main)/(web)/article/[id]/components/markdown";
-import moment from "moment/moment";
+import dayjs from "dayjs";
 
 const ArticleDetail = ({withLoading}) => {
     const params = useParams();
@@ -29,7 +29,7 @@ const ArticleDetail = ({withLoading}) => {
         if(params.id){
             withLoading(getArticle(params.id).then(res => {
                 const data = res.data;
-                data.createAt = moment(data.createAt).format('YYYY.MM.DD');
+                data.createAt = dayjs(data.createAt).format('YYYY.MM.DD');
                 setArticle({...data,loading:false});
             }).catch(() => {
                 router.push('/404')

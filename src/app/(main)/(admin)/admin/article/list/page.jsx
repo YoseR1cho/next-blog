@@ -5,13 +5,14 @@ import { notificate } from "@/components/notification";
 import styles from "../page.module.scss";
 import useFetchList from "@/hooks/useFetchList";
 import { BACKGROUND_PAGESIZE } from "@/utils/config";
-import { deleteArticle } from "@/utils/axios";
+import { deleteArticle } from "@/utils/apis/article";
 import Confirm from "@/app/(main)/(admin)/admin/components/confirm";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import ArticleTable from "@/app/(main)/(admin)/admin/article/list/ArticleTable";
 import {useSelector} from "react-redux";
 import {idTranslate2Tag} from "@/utils";
+import Title from "@/app/(main)/(admin)/admin/components/title";
 
 const Page = () => {
     const searchParams = useSearchParams().toString();
@@ -45,8 +46,9 @@ const Page = () => {
     };
 
     return (
-        <>
+        <div className='app-container'>
             {contextHolder}
+            <Title />
             <div className={styles.manager}>
                 {deleting.state && (
                     <Confirm
@@ -57,7 +59,7 @@ const Page = () => {
                 )}
                 <ArticleTable data={dataList} loading={loading} />
             </div>
-        </>
+        </div>
     );
 };
 export default function PageBar() {

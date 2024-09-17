@@ -91,7 +91,7 @@ const getArticleList = async req => {
             {
                 message: "获取文章失败！",
                 success: false,
-                errorMsg: error,
+                errorMsg: error.message,
             },
             { status: 500 }
         );
@@ -115,11 +115,12 @@ const postArticle = apiHandler(
                 { status: 200 }
             );
         } catch (error) {
+            console.log(error)
             return NextResponse.json(
                 {
                     message: "发布文章失败！",
                     success: false,
-                    errorMsg: error,
+                    errorMsg: error.message,
                 },
                 { status: 500 }
             );

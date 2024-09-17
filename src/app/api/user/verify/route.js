@@ -12,6 +12,8 @@ const verifyIdentity = apiHandler(async (req)=> {
             const id = req.headers.get('userId')
 
 
+            const data = (await users.findOne({ _id:id }))._doc
+
 
             //校验成功则注册新的token用于持久化登录
             const newToken = auth.createAccessToken({id})
