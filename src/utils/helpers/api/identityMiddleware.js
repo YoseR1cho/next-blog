@@ -9,8 +9,6 @@ const identityMiddleware = async (
     const userId = req.headers.get('userId')
     const user = await users.findOne({_id:userId})
 
-    console.log(user);
-
     req.headers.set('userRole',user.role)
 
     if(identity = 'manager' && user.role !==0 ){

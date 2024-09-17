@@ -8,4 +8,7 @@ export const userRegister = user => request.post("/user/reg", user);
 // 验证token
 export const tokenLogin = () => request.post("/user/verify");
 
+// 后台验证
+export const verifyAdmin = ()=>request.post('/user/admin')
+
 export const refreshToken = () => request.post("/user/refreshToken");
