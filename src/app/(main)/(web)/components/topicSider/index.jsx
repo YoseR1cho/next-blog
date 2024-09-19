@@ -32,7 +32,6 @@ const Index = () => {
     const listRef = useRef();
     const params = useParams()
 
-    console.log(topics)
     return (
         <div className={styles.container}>
             <div className={styles.title}>

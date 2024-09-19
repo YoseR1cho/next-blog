@@ -20,7 +20,7 @@ function isPublicPath(req) {
 function apiHandler(handler, { identity, schema, isJwt }) {
     return async (req, ...args) => {
         try {
-            connectToDatabase();
+            await connectToDatabase();
             if (!isPublicPath(req)) {
                 // 执行中间件
                 await jwtMiddleware(req, isJwt);

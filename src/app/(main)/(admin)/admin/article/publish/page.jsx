@@ -28,6 +28,7 @@ const Page = () => {
 
     const onFinish = (values)=>{
         const articlePost = tagTranslate(values,tagList)
+        console.log(values);
         withLoading(publishArticle(articlePost)).then(()=>{
             router.push('/admin/article/list');
             message.success('文章发布成功！')
