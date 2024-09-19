@@ -52,7 +52,7 @@ const TagList = () => {
     };
     const openContextMenu = (tag, event) => {
         event.preventDefault();
-        event.stopPropagation()
+        event.stopPropagation();
         const menuMinWidth = 105;
         const clickX = event.clientX;
         const clickY = event.clientY; //事件发生时鼠标的Y坐标
@@ -99,10 +99,13 @@ const TagList = () => {
         document.body.addEventListener("click", handleClickOutside);
         document.body.addEventListener("contextmenu", handleClickOutside);
 
-        return () =>{
+        return () => {
             document.body.removeEventListener("click", handleClickOutside);
-            document.body.removeEventListener("contextmenu", handleClickOutside);
-        }
+            document.body.removeEventListener(
+                "contextmenu",
+                handleClickOutside
+            );
+        };
     }, []);
 
     return (
@@ -124,23 +127,24 @@ const TagList = () => {
                 )}
             >
                 <ul className={styles.tags_wrap} ref={tagListContainer}>
-                    {(tagList && tagList[0]?.key) && tagList.map(tag => (
-                        <li key={tag.key}>
-                            <Tag
-                                onClose={() => handleClose(tag)}
-                                closable={tag?.key !== "/admin"}
-                                color={
-                                    currentPath === tag.key
-                                        ? "geekblue"
-                                        : "gold"
-                                }
-                                onClick={() => handleClick(tag.key)}
-                                onContextMenu={e => openContextMenu(tag, e)}
-                            >
-                                {tag.label}
-                            </Tag>
-                        </li>
-                    ))}
+                    {tagList &&
+                        tagList.map(tag => (
+                            <li key={tag.key}>
+                                <Tag
+                                    onClose={() => handleClose(tag)}
+                                    closable={tag.key !== "/admin"}
+                                    color={
+                                        currentPath === tag.key
+                                            ? "geekblue"
+                                            : "gold"
+                                    }
+                                    onClick={() => handleClick(tag.key)}
+                                    onContextMenu={e => openContextMenu(tag, e)}
+                                >
+                                    {tag.label}
+                                </Tag>
+                            </li>
+                        ))}
                 </ul>
             </Scrollbars>
             {menuVisible ? (

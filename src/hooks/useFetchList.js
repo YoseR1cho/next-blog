@@ -18,13 +18,13 @@ export default function useFetchList({
     const pathname = usePathname()
 
     useMount(()=>{
-        if(fetchDependence.length===0){
+        if(!fetchDependence){
             fetchWithLoading();
         }
     })
 
     useEffect(()=>{
-        if(fetchDependence.length>0){
+        if(fetchDependence){
             const params = decodeQuery(fetchDependence.searchParams || '')
             fetchWithLoading(params)
         }
@@ -63,7 +63,7 @@ export default function useFetchList({
     const handlePageChange = useCallback(
         (page, pageSize) => {
             // return
-            const search = fetchDependence.searchParams.includes('page=')
+            const search = fetchDependence.searchParams?.includes('page=')
                 ? fetchDependence.searchParams.replace(/(page=)(\d+)/, `?$1${page}`).replace(/(pageSize=)(\d+)/, `pageSize=${pageSize}`)
                 : `?page=${page}&pageSize=${pageSize}`
             const jumpUrl = pathname + search

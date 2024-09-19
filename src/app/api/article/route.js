@@ -11,11 +11,13 @@ const getArticleList = async req => {
     const _pageSize = req.nextUrl.searchParams.get("pageSize");
     const tag = req.nextUrl.searchParams.get("key[tag]");
     const topicId = req.nextUrl.searchParams.get("key[tId]");
+
     try {
         const page = parseInt(_page) || 1;
         const pageSize = parseInt(_pageSize) || 10;
         const skip = (page - 1) * pageSize;
         const tagMatch = tag ? { "tags.name": tag } : {};
+        console.log(topicId);
         const data = topicId
             ? await topics.aggregate([
                   {

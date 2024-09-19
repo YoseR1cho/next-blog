@@ -11,7 +11,7 @@ export default function Page(){
     const user = useSelector(store=>store.user)
     const btnRef = useRef()
     const { messages, input, handleInputChange, handleSubmit, setMessages ,reload } = useChat({
-            api:'api/chat'
+            api:'/api/chat'
     });
     const id = useId()
 
@@ -38,8 +38,12 @@ export default function Page(){
         })
     }
 
-    const handlerRefresh = (m)=>{
-        reload(m)
+    const handlerRefresh = async(m)=>{
+        try{
+            await reload(m)
+        }catch (e){
+            message.error(e.message)
+        }
     }
 
     useEffect(()=>{

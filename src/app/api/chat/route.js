@@ -5,7 +5,7 @@ import {NextResponse} from "next/server";
 
 const openai = createOpenAI({
     apiKey: process.env.OPENAI_API_KEY || '',
-    baseURL: "https://api.wumingai.com"
+    baseURL: "https://apis.wumingai.com"
 })
 
 export const maxDuration = 30;
@@ -18,6 +18,7 @@ export async function POST(req) {
             model: openai('gpt-3.5-turbo'),
             messages,
         });
+
 
 
         return result.toAIStreamResponse();
