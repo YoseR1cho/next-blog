@@ -16,7 +16,7 @@ const ArticleTag = (props)=>{
             {tagList.length > 0 && (
                 <div className={styles.tag_List}>
                     {tagList.map((tag, i) => (
-                        <Tag key={i} color={tag.color} >
+                        <Tag key={i} color={tag.color || 'blue'} >
                             <Link href={`/home/${tag.name}`}>{tag.name}</Link>
                         </Tag>
                     ))}
