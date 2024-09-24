@@ -35,7 +35,7 @@ const updateImage = apiHandler(async req => {
             { status: 200 }
         );
     } catch (error) {
-        console.log("Error occured ", error);
+        console.log("GlobalError occured ", error);
         return NextResponse.json({ msg: "图片上传失败！" }, { status: 500 });
     }
 },{

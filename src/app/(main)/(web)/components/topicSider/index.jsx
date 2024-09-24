@@ -64,7 +64,7 @@ const Index = () => {
                 {topics.map(item => {
                     return (
                         <li key={item._id} className={(params && params.tId === item._id)?styles.focused:''}>
-                            <Link href={`/home/topic/${item._id}`}>
+                            <Link href={`/home/topic/${item._id}/123`}>
                                 {item.title}
                             </Link>
                         </li>
