@@ -11,6 +11,7 @@ const verifyIdentity = apiHandler(async (req)=> {
             // 从请求头获取用戶id
             const id = req.headers.get('userId')
 
+
             const data = (await users.findOne({ _id:id }))._doc
 
 
