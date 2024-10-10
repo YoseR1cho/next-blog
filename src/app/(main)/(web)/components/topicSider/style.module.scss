@@ -41,6 +41,18 @@
     }
 }
 
+@media screen and (min-width: 1192px) and (max-width: 1740px){
+    .container{
+        right: 50px;
+    }
+}
+
+@media screen and (max-width: 1192px){
+    .container{
+        display: none;
+    }
+}
+
 .focused {
     transform: translateX(-55px);
     a {

@@ -26,7 +26,7 @@ export default function Page(){
 
     const keyDownHandler = (e)=>{
         const code = e.code
-        console.log(code);
+
         if(code === 'Enter' && !e.shiftKey){
             btnRef.current.click()
         }

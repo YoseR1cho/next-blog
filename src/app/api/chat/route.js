@@ -19,7 +19,9 @@ export async function POST(req) {
             messages,
         });
 
-
+        for await (const textPart of result.textStream) {
+            console.log(textPart);
+        }
 
         return result.toAIStreamResponse();
     }catch (e){
