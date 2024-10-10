@@ -56,7 +56,7 @@ export function idTranslate2Tag(ids=[], tags) {
         for (let i of tags) {
             if (i.id === item) return { name: i.name, color: i.color };
         }
-    });
+    }).filter(item=>item);
     return newTags;
 }
 
