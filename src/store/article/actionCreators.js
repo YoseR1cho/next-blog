@@ -27,7 +27,8 @@ export const deleteTag = (id)=>{
 
             dispatch(_deleteTag(id))
         }catch (e){
-            throw new Error(e)
+            console.log(e);
+            
         }
 
     }

@@ -22,7 +22,8 @@ export const fetchLogin = values => {
                 })
             );
         } catch (err) {
-            throw err;
+            console.log(err);
+            
         }
     };
 };
@@ -32,7 +33,8 @@ export const fetchRegister = values => {
         try {
             const res = await userRegister(values);
         } catch (err) {
-            throw err;
+            console.log(err);
+            
         }
     };
 };

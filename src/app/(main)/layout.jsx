@@ -5,7 +5,7 @@ import PublicComponents from "@/components/PublicComponents";
 
 
 export const metadata = {
-    title: "NEXT Blog",
+    title: "YoseR1cho's Home",
     description: "yoseR1cho's blog",
 };
 

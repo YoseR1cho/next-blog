@@ -5,6 +5,11 @@
     padding-bottom: 16px;
     top: 100px;
     background-color: #fff;
+    border-radius: 12px;
+    transition: .3s all;
+    &:hover{
+        transform: scale(1.05);
+    }
 
     .title {
         margin:0 1rem;

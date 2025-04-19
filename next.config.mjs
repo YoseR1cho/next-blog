@@ -17,6 +17,9 @@ const nextConfig = {
         }))
         config.optimization.minimize = true
         return config
+    },
+    images:{
+        domains:['localhost','www.yoser1cho.top']
     }
 };
 

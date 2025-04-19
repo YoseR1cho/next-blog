@@ -19,4 +19,8 @@ export const patchArticle = (id, article) =>
     request.patch(`/article/${id}`, { ...article });
 
 // 将文章收录进主题
-export const recordedArticle2Topic = (payload)=>request.post('/article/record',payload)
+export const recordedArticle2Topic = (body)=>request.post('/topic/articleManage',body)
+
+export const deleteArticle2Topic = (body)=>request.delete('/topic/articleManage',{data:body})
+
+export const getTopicsByArticle = (articleId)=>request.get(`/article/colTopic?articleId=${articleId}`)

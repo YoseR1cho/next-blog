@@ -1,6 +1,5 @@
 import {addTopic, getAllTopic,deleteTopic as _deleteTopic} from "@/utils/apis/topic";
 import {addNewTopic, deleteOneTopic, setTopicList} from "@/store/topic/reducer";
-import {recordedArticle2Topic} from "@/utils/apis/article";
 export const getTopics= ()=>{
     return async dispatch=>{
         try {
@@ -9,23 +8,11 @@ export const getTopics= ()=>{
             dispatch(setTopicList(list))
         }catch (e){
             console.log(e)
-            throw new Error(e)
         }
 
     }
 }
 
-export const recordedArticle= (payload)=>{
-    return async dispatch=>{
-        try {
-            await recordedArticle2Topic(payload);
-        }catch (e){
-            console.log(e)
-            throw new Error(e)
-        }
-
-    }
-}
 
 export const setTopics = (payload)=>{
     return async dispatch =>{
@@ -36,7 +23,6 @@ export const setTopics = (payload)=>{
 
         }catch (e){
             console.log(e)
-            throw new Error(e)
         }
     }
 }
@@ -49,7 +35,6 @@ export const deleteTopic = (payload)=>{
             dispatch(deleteOneTopic(payload))
         }catch (e){
             console.log(e)
-            throw new Error(e)
         }
     }
 }

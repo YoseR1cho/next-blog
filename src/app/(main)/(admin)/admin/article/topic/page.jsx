@@ -7,9 +7,12 @@ import { useSelector } from "react-redux";
 import AddTopicModal from "@/app/(main)/(admin)/admin/article/topic/AddTopicModal";
 import RedButton from "@/components/button/RedButton";
 import DeleteTopicModal from "@/app/(main)/(admin)/admin/article/topic/DeleteTopicModal";
+import BlueButton from "@/components/button/BlueButton";
+import ArticleManageModal from "./ArticleManageModal";
 
 const Page = () => {
     const [isModalOpen, setIsModalOpen] = React.useState(false);
+    const [isArticleManageModalOpen, setIsArticleManageModalOpen] = React.useState(false); // 文章管理弹窗的状态变量
     const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);
     const topics = useSelector(store => store.topic).topicList;
 
@@ -19,6 +22,10 @@ const Page = () => {
 
     const handleModalOpen = ()=>{
         setIsModalOpen(true)
+    }
+
+    const handleArticleManageModalOpen = ()=>{
+        setIsArticleManageModalOpen(!isArticleManageModalOpen)
     }
 
     const columns = [
@@ -54,13 +61,15 @@ const Page = () => {
             },
         },
         {
-            title: "Action",
+            title: "操作",
             key: "action",
             align: "center",
             width: "250px",
             render: (text, record) => (
                 <div>
+                    <BlueButton onClick={handleArticleManageModalOpen} style={{marginRight:'12px'}}>管理</BlueButton>
                     <RedButton onClick={handleDeleteModalOpen}>删除</RedButton>
+                    <ArticleManageModal isModalOpen={isArticleManageModalOpen} onCancel={handleArticleManageModalOpen}/>
                     <DeleteTopicModal
                         setIsModalOpen={setIsDeleteModalOpen}
                         isModalOpen={isDeleteModalOpen}

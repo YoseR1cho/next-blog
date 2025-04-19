@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import connectToDatabase from "@/utils/mongodb";
 import articles from "@/models/articles";
-import topics from "@/models/topics";
+import { articleTopicAssociations } from "@/models/topics";
 import { apiHandler } from "@/utils/helpers/api/api-handler";
 
 connectToDatabase();
@@ -17,72 +17,78 @@ const getArticleList = async req => {
         const pageSize = parseInt(_pageSize) || 10;
         const skip = (page - 1) * pageSize;
         const tagMatch = tag ? { "tags.name": tag } : {};
-        console.log(topicId);
-        const data = topicId
-            ? await topics.aggregate([
-                  {
-                      $match: {
-                          _id: topicId,
-                      },
-                  },
-                  {
-                      $unwind: "$articleIds",
-                  },
-                  {
-                      $lookup: {
-                          from: "articles",
-                          let: { articleId: "$articlesIds" },
-                          pipeline: [
-                              {
-                                  $match: {
-                                      $expr: {
-                                          $eq: ["$_id", "articleId"],
-                                      },
-                                  },
-                              },
-                          ],
-                          as: "topics",
-                      },
-                  },
-                  {
-                      $facet: {
-                          articleData: [
-                              { $sort: { createAt: -1 } },
-                              { $skip: skip },
-                              { $limit: pageSize },
-                          ],
-                          totalCount: [{ $count: "totalCount" }],
-                      },
-                  },
-              ])
-            : await articles.aggregate([
-                  {
-                      $lookup: {
-                          from: "tags",
-                          localField: "tags",
-                          foreignField: "_id",
-                          as: "tags",
-                      },
-                  },
-                  {
-                      $match: tagMatch,
-                  },
-                  {
-                      $facet: {
-                          articleData: [
-                              { $sort: { createAt: -1 } },
-                              { $skip: skip },
-                              { $limit: pageSize },
-                          ],
-                          totalCount: [{ $count: "totalCount" }],
-                      },
-                  },
-              ]);
+
+        let data;
+        if (topicId) {
+            // 1. 查找 topicId 对应的所有关联项
+            const associations = await articleTopicAssociations.find({
+                topicId,
+            });
+            // 2. 拿到所有文章 id
+            const articleIds = associations.map(item => item.articleId);
+            // 3. 查询文章列表
+            data = await articles.aggregate([
+                {
+                    $match: {
+                        _id: { $in: articleIds },
+                        ...tagMatch,
+                    },
+                },
+                {
+                    $lookup: {
+                        from: "tags",
+                        localField: "tags",
+                        foreignField: "_id",
+                        as: "tags",
+                    },
+                },
+                {
+                    $facet: {
+                        articleData: [
+                            { $sort: { createAt: -1 } },
+                            { $skip: skip },
+                            { $limit: pageSize },
+                        ],
+                        totalCount: [{ $count: "totalCount" }],
+                    },
+                },
+            ]);
+        } else {
+            data = await articles.aggregate([
+                {
+                    $lookup: {
+                        from: "tags",
+                        localField: "tags",
+                        foreignField: "_id",
+                        as: "tags",
+                    },
+                },
+                {
+                    $match: tagMatch,
+                },
+                {
+                    $facet: {
+                        articleData: [
+                            { $sort: { createAt: -1 } },
+                            { $skip: skip },
+                            { $limit: pageSize },
+                        ],
+                        totalCount: [{ $count: "totalCount" }],
+                    },
+                },
+            ]);
+        }
+
+        const articleData = data[0]?.articleData || [];
+        const totalCount = data[0]?.totalCount?.[0]?.totalCount || 0;
 
         return NextResponse.json(
             {
                 message: "文章列表获取成功!",
-                data: data,
+                data: {
+                    articleData,
+                    totalCount
+                },
                 success: true,
             },
             { status: 200 }
@@ -117,7 +123,7 @@ const postArticle = apiHandler(
                 { status: 200 }
             );
         } catch (error) {
-            console.log(error)
+            console.log(error);
             return NextResponse.json(
                 {
                     message: "发布文章失败！",

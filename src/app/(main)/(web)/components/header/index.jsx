@@ -90,12 +90,7 @@ function Index() {
             <Header className={styles.header}>
                 <div className={styles.leftHeader}>
                     <div className={styles.avatarBox}>
-                        <Image
-                            src={"/images/avatar.png"}
-                            alt={"头像"}
-                            width={64}
-                            height={64}
-                        />
+                        <div className={styles.animatedAvatar}></div>
                     </div>
 
                     <Menu

@@ -9,9 +9,15 @@ import TopicModal from "@/app/(main)/(admin)/admin/article/list/TopicModal";
 const ArticleTable = ({ data, loading }) => {
     const router = useRouter();
     const [isModalOpen,setIsModalOpen] = React.useState(false)
+    const [currentArticleId,setCurrentArticleId] = React.useState('')
 
     const handleModalOpen = ()=>{
         setIsModalOpen(prevState => !prevState)
+    }
+
+    const handleArticleClick = (articleId)=>{
+        setCurrentArticleId(articleId)
+        handleModalOpen()
     }
 
     const columns = [
@@ -70,11 +76,10 @@ const ArticleTable = ({ data, loading }) => {
             key: "action",
             align: "center",
             width: '250px',
-            render: (text,record) => (
-                <div>
+            render: (_,record) => (
+                <div key={record._id}>
                     <GreenButton style={{marginRight:'1rem'}} onClick={()=>router.push(`/admin/article/update/${record._id}`)}>修改文章</GreenButton>
-                    <BlueButton onClick={handleModalOpen}>专题设置</BlueButton>
-                    <TopicModal isModalOpen={isModalOpen} setModalOpen={setIsModalOpen} articleId={record._id}/>
+                    <BlueButton onClick={()=>handleArticleClick(record._id)} >专题设置</BlueButton>
                 </div>
             ),
         },
@@ -89,6 +94,7 @@ const ArticleTable = ({ data, loading }) => {
                     loading={loading}
                     bordered
                 />
+                {isModalOpen && <TopicModal isModalOpen={isModalOpen} setModalOpen={handleModalOpen} articleId={currentArticleId}/>}
             </div>
         </>
     );

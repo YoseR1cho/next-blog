@@ -1,7 +1,7 @@
 import connectToDatabase from "@/utils/mongodb";
 import {apiHandler} from "@/utils/helpers/api/api-handler";
 import {NextResponse} from "next/server";
-import topics from "@/models/topics";
+import {topics} from "@/models/topics";
 
 connectToDatabase();
 const deleteTopic = apiHandler(async (req, { params }) => {
@@ -18,6 +18,8 @@ const deleteTopic = apiHandler(async (req, { params }) => {
             { status: 200 }
         );
     } catch (error) {
+        console.log(error);
+        
         return NextResponse.json(
             {
                 message: "删除专题失败！",

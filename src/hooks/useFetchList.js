@@ -35,7 +35,7 @@ export default function useFetchList({
         fetchDataList(params);
     }
 
-    function fetchDataList(params){
+    function fetchDataList(params){ 
         const requestParams = {
             page:pagination.current,
             pageSize:pagination.pageSize,
@@ -45,8 +45,8 @@ export default function useFetchList({
         requestParams.page = parseInt(requestParams.page);
         requestParams.pageSize = parseInt(requestParams.pageSize);
         getArticleList(requestParams).then(res=>{
-            let data = res.data[0]
-            pagination.total = data.totalCount[0]?.totalCount;
+            let data = res.data
+            pagination.total = data?.totalCount || 0;
             pagination.current = parseInt(requestParams.page);
             pagination.pageSize = parseInt(requestParams.pageSize);
             setDataList(data.articleData);

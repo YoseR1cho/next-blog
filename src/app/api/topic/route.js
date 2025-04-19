@@ -1,8 +1,7 @@
-import topics from "@/models/topics";
+import {topics,articleTopicAssociations} from "@/models/topics";
 import {NextResponse} from "next/server";
 import {apiHandler} from "@/utils/helpers/api/api-handler";
 import connectToDatabase from "@/utils/mongodb";
-
 connectToDatabase()
 
 const getTopics = async(req)=>{

@@ -1,8 +1,8 @@
 import "../globals.scss";
 
 export const metadata = {
-    title: "welcome to my Blog",
-    description: "welcome to yoseR1cho's blog",
+    title: "Welcome to my Blog",
+    description: "Welcome to yoseR1cho's blog",
 };
 
 export default function RootLayout({children}) {

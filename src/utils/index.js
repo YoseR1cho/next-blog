@@ -51,12 +51,14 @@ export function tagTranslate(obj, tags) {
     return newObj;
 }
 
-export function idTranslate2Tag(ids=[], tags) {
-    let newTags = ids.map(item => {
-        for (let i of tags) {
-            if (i.id === item) return { name: i.name, color: i.color };
-        }
-    }).filter(item=>item);
+export function idTranslate2Tag(ids = [], tags) {
+    let newTags = ids
+        .map(item => {
+            for (let i of tags) {
+                if (i.id === item) return { name: i.name, color: i.color };
+            }
+        })
+        .filter(item => item);
     return newTags;
 }
 
@@ -140,3 +142,7 @@ export function getMenuItemInMenuListByProperty(menuList, key, value) {
     }
     return res;
 }
+
+export const isMobile = () => {
+    return window.innerWidth < 768;
+};

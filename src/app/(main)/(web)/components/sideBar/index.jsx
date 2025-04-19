@@ -12,7 +12,7 @@ function SideBar(){
                 <div className={styles.menu_box}>
                     <div className={styles.wrap}>
                         <div className={styles.avatar}></div>
-                        <h2><Link href="/home">myBlog</Link></h2>
+                        <h2><Link href="/home">YoseR1cho</Link></h2>
                         <p>感谢关顾</p>
                         <nav className={styles.mainNav}>
                             <LinkList/>

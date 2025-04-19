@@ -36,10 +36,6 @@
     align-items: center;
     padding: 0 0 30px 0;
 
-    h2,p{
-        margin-left: 20px;
-
-    }
     h2 {
         font-size: 30px;
         font-weight: 400;
@@ -47,13 +43,17 @@
     p{
         font-size: 17px;
         color: #2ade16;
-        margin: 5px 0 0 20px ;
+        margin: 5px 0;
     }
 }
 
 .wrap {
     height: 100%;
     background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .avatar {

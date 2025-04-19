@@ -16,6 +16,7 @@ const PublicComponents = ({children}) => {
         }catch (e) {
             message.error(e.message)
         }
+
     }, []);
     return (
         <>
